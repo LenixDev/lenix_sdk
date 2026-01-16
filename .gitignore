@@ -1,0 +1,11 @@
+*.dll
+*.pdb
+*.cache
+*.txt
+*.json
+*.editorconfig
+*.targets
+*.props
+*.Up2Date
+*.AssemblyAttributes.cs
+*.AssemblyInfo.cs
