@@ -1,8 +1,7 @@
 using System;
-using System.Collections.Generic;
 using CitizenFX.Core;
-using lenix_sdk.Client;
 using static CitizenFX.Core.Native.API;
+using static lenix_sdk.Client.Modules;
 
 public class Main : BaseScript
 {
@@ -11,15 +10,13 @@ public class Main : BaseScript
     internal string Key { get; set; }
     internal string Command { get; set; }
   }
-  private class ResourceBindARGS
+  private class ResourceBindARGS : BindARGS
   {
     internal string Resource { get; set; }
-    internal string Key { get; set; }
-    internal string Command { get; set; }
   }
   public Main()
   {
-    Modules.DefineCommand("sdk", () => Debug.WriteLine("sdk typed"));
+    DefineCommand("sdk", () => Debug.WriteLine("sdk typed"));
     RegisterNuiCallback("disconnect", new Action<dynamic/* null */, Action<bool>>((data, callback) =>
     {
       ExecuteCommand("disconnect");
@@ -34,6 +31,11 @@ public class Main : BaseScript
     {
       ExecuteCommand($"rbind {data.Resource} {data.Key} {data.Command}");
       callback(true);
+    }));
+    RegisterNuiCallback("getConfig", new Action<dynamic/* null */, Action<Config[]>>((data, callback) =>
+    {
+      Config[] config = Config.Items;
+      callback(config);
     }));
   }
 }
