@@ -54,12 +54,12 @@
           return <button key={label} onClick={onClick}>{label}</button>
         } else {
           return (
-            <form onSubmit={(e) => {
+            <form key={label} style={{ display: 'flex', flexDirection: 'column' }} onSubmit={(e) => {
                 e.preventDefault()
                 const formData = new FormData(e.currentTarget)
                 const values = Array.from(formData.values())
                 onClick(...values)
-              }} style={{ display: 'flex', flexDirection: 'column' }}>
+              }}>
               <button type='button' onClick={() => setActive(label)}>{label}</button>
               {active === label && (
                 <>
