@@ -9,3 +9,5 @@
 *.Up2Date
 *.AssemblyAttributes.cs
 *.AssemblyInfo.cs
+
+.DS_Store
