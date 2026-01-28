@@ -1,14 +1,14 @@
-public class Config
+internal class Config
 {
-  public string Label { get; set; }
-  public class Parameter
+  private string Label { get; set; }
+  private class Parameter
   {
-    public string Placeholder { get; set; }
-    public bool Required { get; set; }
+    private string Placeholder { get; set; }
+    private bool Required { get; set; }
   }
-  public Parameter[] Parameters { get; set; }
+  private Parameter[] Parameters { get; set; }
   
-  public static readonly Config[] Items = new Config[]
+  internal static readonly Config[] Items = new Config[]
   {
     new Config { Label = "Disconnect" },
     new Config {
