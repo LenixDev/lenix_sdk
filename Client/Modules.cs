@@ -4,10 +4,10 @@ using CitizenFX.Core;
 using static CitizenFX.Core.Native.API;
 
 namespace lenix_sdk.Client {
-  public static class Modules
+  internal static class Modules
   {
     private static readonly bool IsCommandRestricted = false;
-    public static void DefineCommand(string commandName, Action callback)
+    internal static void DefineCommand(string commandName, Action callback)
     {
       RegisterCommand(commandName, new Action<int, List<object>, string>((source, args, rawCommand) =>
       {
