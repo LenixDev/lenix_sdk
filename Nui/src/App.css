@@ -3,3 +3,9 @@
   text-align: center;
   width: 25%;
 }
+
+#ButtonGroup {
+  display: flex;
+  flex-direction: column;
+  gap: .2em;
+}
