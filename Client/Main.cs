@@ -8,7 +8,13 @@ public class Main : BaseScript
 {
   private class BindARGS
   {
-    internal string Input { get; set; }
+    internal string Key { get; set; }
+    internal string Command { get; set; }
+  }
+  private class ResourceBindARGS
+  {
+    internal string Resource { get; set; }
+    internal string Key { get; set; }
     internal string Command { get; set; }
   }
   public Main()
@@ -21,7 +27,12 @@ public class Main : BaseScript
     }));
     RegisterNuiCallback("bind", new Action<BindARGS, Action<bool>>((data, callback) =>
     {
-      ExecuteCommand($"bind {data.Input} {data.Command}");
+      ExecuteCommand($"bind {data.Key} {data.Command}");
+      callback(true);
+    }));
+    RegisterNuiCallback("resourcebind", new Action<ResourceBindARGS, Action<bool>>((data, callback) =>
+    {
+      ExecuteCommand($"rbind {data.Resource} {data.Key} {data.Command}");
       callback(true);
     }));
   }
