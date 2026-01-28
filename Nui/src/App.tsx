@@ -5,16 +5,20 @@ import { triggerNuiCallback } from '@trippler/tr_lib/nui'
 
 const App = () => {
   const [search, setSearch] = useState('')
-  const features = [
-    {
-      label: 'Disconnect',
-      onClick: () => triggerNuiCallback('disconnect')
-    },
-    {
-      label: 'Bind',
-      onClick: (Input: string, Command: string) => triggerNuiCallback('bind', { Input, Command })
-    },
-  ] as const
+  const features = {
+    buttons: [
+      {
+        label: 'Disconnect',
+        onClick: () => triggerNuiCallback('disconnect')
+      },
+    ],
+    dropdowns: [
+      {
+        label: 'Bind',
+        onClick: (Input: string, Command: string) => triggerNuiCallback('bind', { Input, Command })
+      },
+    ], 
+  } as const
 
   const filteredFeatures = useMemo(() => features.filter(({ label }) => label.toLowerCase().includes(search.toLowerCase())), [search])
 
