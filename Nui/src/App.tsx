@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import './App.css'
-import { Buttons, ButtonGroup, Container, Header, SearchBar } from './elements/buttons'
+import { Buttons, ButtonGroup, Container, Header, SearchBar } from './elements'
 
 const App = () => {
   const [search, setSearch] = useState<string | null>(null)

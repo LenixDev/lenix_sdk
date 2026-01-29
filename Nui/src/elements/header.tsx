@@ -1,0 +1,1 @@
+export default () => <h3 className={`bg-stone-600 text-center`}>SDK Tools</h3>
