@@ -47,7 +47,7 @@ const Dropdown = ({ label, onClick, args, active, setActive }: { label: string, 
       e.preventDefault()
       const formData = new FormData(e.currentTarget)
       const values = Array.from(formData.values())
-      onClick(...values)
+      onClick(...values.map(value => String(value)))
     }}>
       <Button label={label} onClick={() => setActive(label)} />
       {active === label && (
