@@ -1,3 +1,5 @@
+import type { Feature } from "."
+
 export default ({
   label,
   onClick

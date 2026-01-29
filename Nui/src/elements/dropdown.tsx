@@ -1,3 +1,7 @@
+import type { Feature, ButtonStates } from "."
+import { keepOthersExpandedOnSelect } from "."
+import Inputs from "./inputs"
+
 export default ({
   label,
   onClick,

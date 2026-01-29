@@ -1,3 +1,5 @@
+import type { Feature } from "."
+
 export default ({ args }: { args: Feature["args"] }) => {
   return args?.map(({ placeholder, required }, index) => 
     (
