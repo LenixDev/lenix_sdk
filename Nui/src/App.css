@@ -4,6 +4,11 @@
   width: 25%;
 }
 
+#Form {
+  display: flex;
+  flex-direction: column;
+}
+
 #ButtonGroup {
   display: flex;
   flex-direction: column;
