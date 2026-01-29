@@ -12,3 +12,19 @@ mklink /d X:\cfx-server-data\resources\[local]\lenix_sdk dist
 ```
 
 Afterwards, you can use `ensure lenix_sdk` in your server.cfg or server console to start the resource.
+
+## NUI
+### Mac
+```bash
+brew install pnpm
+pnpm i
+cd Nui
+pnpm run build
+```
+### Windows
+```bash
+npm i -g pnpm@latest-10
+pnpm i
+cd Nui
+pnpm run build
+```
