@@ -1,6 +1,8 @@
 import { useState } from "react"
 import { triggerNuiCallback } from '@trippler/tr_lib/nui'
 
+const keepOthersExpandedOnSelect = false
+
 type Children = React.ReactNode
 type Feature = {
   label: string
@@ -13,12 +15,12 @@ type Feature = {
 type ButtonStates = Record<string, boolean> | null
 
 export const Container = ({ children }: { children: Children }) => (
-  <div style={{ backgroundColor: 'hsl(0, 0%, 0%)' }}>
+  <div className={`bg-black rounded-md overflow-hidden m-auto`}>
     { children }
   </div>
 )
 
-export const Header = () => <h3 style={{ backgroundColor: 'hsl(0, 0.00%, 23.90%)' }}>SDK Tools</h3>
+export const Header = () => <h3 className={`bg-stone-600 text-center`}>SDK Tools</h3>
 
 export const SearchBar = ({ onChange }: { onChange: (state: string) => void }) => (
   <input
@@ -29,7 +31,7 @@ export const SearchBar = ({ onChange }: { onChange: (state: string) => void }) =
 )
 
 export const ButtonGroup = ({ children }: { children: Children }) => (
-  <div id="ButtonGroup">
+  <div className={`flex flex-col items-center gap-.2em`}>
     {children}
   </div>
 )
@@ -65,9 +67,8 @@ const Dropdown = ({
   buttonsStates: ButtonStates
   setButtonsStates: (state: ButtonStates) => void
 }) => {
-  const keepOthersExpandedOnSelect = false
   return (
-    <form id="Form" onSubmit={Event => {
+    <form className={`flex flex-col`} onSubmit={Event => {
       Event.preventDefault()
       const formData = new FormData(Event.currentTarget)
       const values = Array.from(formData.values())
