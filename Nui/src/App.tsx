@@ -3,7 +3,7 @@ import './App.css'
 import { Buttons, ButtonGroup, Container, Header, SearchBar } from './elements/buttons'
 
 const App = () => {
-const [search, setSearch] = useState<string | null>(null)
+  const [search, setSearch] = useState<string | null>(null)
   return (
     <Container>
       <Header/>

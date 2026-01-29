@@ -23,6 +23,43 @@ export const ButtonGroup = ({ children }: { children: React.ReactNode }) => (
   </div>
 )
 
+const Button = ({ label, onClick }: { label: string, onClick: () => void }) => {
+  return <button type='button' key={label} onClick={onClick}>{label}</button>
+}
+
+const Inputs = ({ args }: { args: { placeholder: string, required: boolean }[] }) => {
+  return args.map(({ placeholder, required }, index) => 
+    (
+      <input
+        key={index}
+        name={`input-${index}`}
+        type="text"
+        placeholder={placeholder}
+        required={required}
+      />
+    )
+  )
+}
+
+const Dropdown = ({ label, onClick, args, active, setActive }: { label: string, onClick: (...args: string[]) => void, args: { placeholder: string, required: boolean }[], active: string | null, setActive: (value: string) => void }) => {
+  return (
+    <form key={label} style={{ display: 'flex', flexDirection: 'column' }} onSubmit={e => {
+      e.preventDefault()
+      const formData = new FormData(e.currentTarget)
+      const values = Array.from(formData.values())
+      onClick(...values)
+    }}>
+      <Button label={label} onClick={() => setActive(label)} />
+      {active === label && (
+        <>
+          <Inputs args={args} />
+          <button type='submit'>Submit</button>
+        </>
+      )}
+    </form>
+  )
+}
+
 export const Buttons = ({ search }: { search: string | null }) => {
   const [active, setActive] = useState<string | null>(null)
   const fromCB = [
@@ -77,31 +114,9 @@ export const Buttons = ({ search }: { search: string | null }) => {
 
   return filteredFeatures.map(({ label, onClick, args }) => {
     if (!args) {
-      return <button key={label} onClick={onClick as any}>{label}</button>
+      return <Button key={label} label={label} onClick={onClick as any} />
     } else {
-      return (
-        <form key={label} style={{ display: 'flex', flexDirection: 'column' }} onSubmit={({ currentTarget }) => {
-          const formData = new FormData(currentTarget)
-          const values = Array.from(formData.values())
-          onClick(...values)
-        }}>
-          <button type='button' onClick={() => setActive(label)}>{label}</button>
-          {active === label && (
-            <>
-              {args.map(({ placeholder, required }, index) => 
-                <input
-                  key={index}
-                  name={`input-${index}`}
-                  type="text"
-                  placeholder={placeholder}
-                  required={required}
-                />
-              )}
-              <button type='submit'>Submit</button>
-            </>
-          )}
-        </form>
-      )
+      return <Dropdown key={label} label={label} onClick={onClick} args={args} active={active} setActive={setActive} />
     }
   })
 }
