@@ -23,7 +23,7 @@ export const ButtonGroup = ({ children }: { children: React.ReactNode }) => (
   </div>
 )
 
-const Button = ({ label, onClick }: { label: string, onClick: () => void }) => {
+const Button = ({ label, onClick }: { label: string, onClick: any }) => {
   return <button type='button' key={label} onClick={onClick}>{label}</button>
 }
 
@@ -41,7 +41,22 @@ const Inputs = ({ args }: { args: { placeholder: string, required: boolean }[] }
   )
 }
 
-const Dropdown = ({ label, onClick, args, active, setActive }: { label: string, onClick: (...args: string[]) => void, args: { placeholder: string, required: boolean }[], active: string | null, setActive: (value: string) => void }) => {
+const Dropdown = ({
+  label,
+  onClick,
+  args,
+  active,
+  setActive
+}: {
+  label: string,
+  onClick: (...args: string[]) => void,
+  args: {
+    placeholder: string,
+    required: boolean
+  }[],
+  active: string | null,
+  setActive: (value: string) => void
+}) => {
   return (
     <form key={label} style={{ display: 'flex', flexDirection: 'column' }} onSubmit={e => {
       e.preventDefault()
@@ -112,11 +127,11 @@ export const Buttons = ({ search }: { search: string | null }) => {
     !search || label.toLowerCase().includes(search.toLowerCase())
   )
 
-  return filteredFeatures.map(({ label, onClick, args }) => {
-    if (!args) {
-      return <Button key={label} label={label} onClick={onClick as any} />
+  return filteredFeatures.map(feature => {
+    if (!feature.args) {
+      return <Button {...feature} />
     } else {
-      return <Dropdown key={label} label={label} onClick={onClick} args={args} active={active} setActive={setActive} />
+      return <Dropdown {...feature} active={active} setActive={setActive} />
     }
   })
 }
