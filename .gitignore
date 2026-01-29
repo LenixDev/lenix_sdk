@@ -2,7 +2,8 @@
 *.pdb
 *.cache
 *.txt
-*.json
+*.dgspec.json
+*.assets.json
 *.editorconfig
 *.targets
 *.props
