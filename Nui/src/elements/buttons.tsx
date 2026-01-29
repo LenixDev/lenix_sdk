@@ -90,7 +90,7 @@ const Dropdown = ({
 
 export const Buttons = ({ search }: { search: string | null }) => {
   const [buttonsStates, setButtonsStates] = useState<ButtonStates>(null)
-  const fromCB = [
+  const Config = [
     {
       label: 'Disconnect',
     },
@@ -132,19 +132,23 @@ export const Buttons = ({ search }: { search: string | null }) => {
     {onClick: (Resource: string, Key: string, Command: string) => triggerNuiCallback('resourcebind', { Resource, Key, Command })},
   ] as const
 
-  const features = fromCB.map((item, index) => (
+  const injectedConfig = Config.map((item, index) => (
     { ...item, onClick: nuiCallbacks[index].onClick }
   ))
 
-  const filteredFeatures = features.filter(({ label }) => 
+  const filteredFeatures = injectedConfig.filter(({ label }) => 
     !search || label.toLowerCase().includes(search.toLowerCase())
   )
 
-  return filteredFeatures.map(feature => {
+  const itemsFound = filteredFeatures.map(feature => {
     if (!feature.args) {
       return <Button key={feature.label} {...feature} />
     } else {
       return <Dropdown key={feature.label} {...feature} {...{ buttonsStates, setButtonsStates}} />
     }
   })
+  if (!itemsFound.length) {
+    return <>no items found</>
+  }
+  return itemsFound
 }
