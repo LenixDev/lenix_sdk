@@ -4,11 +4,12 @@ export type Children = React.ReactNode
 
 export type Feature = {
   label: string
-  onClick: (...args: string[]) => void
+  onClick: (...args: any[]) => void
   args?: {
     placeholder: string
     required: boolean
   }[]
 }
 
-export type ButtonStates = Record<string, boolean> | null
+export type States = Record<string, boolean> | null
+export type ButtonStates = States
