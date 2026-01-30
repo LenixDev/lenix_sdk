@@ -1,22 +1,40 @@
 import { useState } from "react"
-import type { Feature, ButtonStates } from "."
+import type { ButtonStates } from "."
 import { keepOthersExpandedOnSelect } from "."
 import Inputs from "./inputs"
 import Range from "./range"
 import Radio from "./radio"
 
+const Button = ({ 
+  buttonsStates,
+  setButtonsStates,
+  label
+} : {
+  buttonsStates: ButtonStates,
+  setButtonsStates: (buttonsStates: ButtonStates) => void,
+  label: string
+}) => (
+  <button
+    type='button'
+    className={`${buttonsStates?.[label] ? 'bg-stone-400' : 'bg-stone-500'}`}
+    onClick={
+      () => setButtonsStates(
+        { ...(keepOthersExpandedOnSelect ? buttonsStates : {}), [label]: !buttonsStates?.[label] }
+      )
+    }
+  >{buttonsStates?.[label] ? `⬇︎ ${label} ⬇︎` : `→ ${label} ←`}</button>
+)
+
 export default ({
   label,
-  onClick,
   args,
   radio,
   range,
 }: {
-  label: Feature["label"]
-  onClick: Feature["onClick"]
-  args?: Feature["args"]
-  radio?: Feature["radio"]
-  range?: Feature["range"]
+  label: string
+  args?: unknown
+  radio?: unknown
+  range?: unknown
 }) => {
   const [buttonsStates, setButtonsStates] = useState<ButtonStates>(null)
   return (
@@ -26,15 +44,7 @@ export default ({
       const values = Array.from(formData.values())
       onClick(...values.map(value => String(value)))
     }}>
-      <button
-        type='button'
-        className={`${buttonsStates?.[label] ? 'bg-stone-400' : 'bg-stone-500'}`}
-        onClick={
-          () => setButtonsStates(
-            { ...(keepOthersExpandedOnSelect ? buttonsStates : {}), [label]: !buttonsStates?.[label] }
-          )
-        }
-      >{buttonsStates?.[label] ? `⬇︎ ${label} ⬇︎` : `→ ${label} ←`}</button>
+      <Button {...{ buttonsStates, setButtonsStates, label }} />
       {buttonsStates?.[label] && (
         <>
           {args && !range ? (
