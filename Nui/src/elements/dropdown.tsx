@@ -1,24 +1,24 @@
+import { useState } from "react"
 import type { Feature, ButtonStates } from "."
 import { keepOthersExpandedOnSelect } from "."
 import Inputs from "./inputs"
 import Range from "./range"
+import Radio from "./radio"
 
 export default ({
   label,
   onClick,
   args,
+  radio,
   range,
-  buttonsStates,
-  setButtonsStates,
 }: {
   label: Feature["label"]
   onClick: Feature["onClick"]
   args?: Feature["args"]
+  radio?: Feature["radio"]
   range?: Feature["range"]
-  buttonsStates: ButtonStates
-  setButtonsStates: (state: ButtonStates) => void
 }) => {
-
+  const [buttonsStates, setButtonsStates] = useState<ButtonStates>(null)
   return (
     <form className={`flex flex-col`} onSubmit={Event => {
       Event.preventDefault()
@@ -42,8 +42,13 @@ export default ({
               <Inputs args={args} />
               <button type='submit' className="bg-blue-500">Submit</button>
             </>
-          ) : !args && range ? (
-            <Range />
+          ) : !args && range && radio ? (
+            <>
+              <Radio options={radio} />
+              <Range />
+            </>
+          ) : !args && !radio && range ? (
+              <Range />
           ) : (
             <div className="text-red-500">Configuration Error</div>
           )}
