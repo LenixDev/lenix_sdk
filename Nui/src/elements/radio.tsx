@@ -1,9 +1,7 @@
-import type { Feature } from "."
-
 export default ({
   options
 } : {
-  options: Feature["radio"]
+  options: unknown
 }) => (
   <div className="flex gap-1 justify-center">
     {options?.map((option, index) => (
