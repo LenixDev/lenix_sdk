@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { triggerNuiCallback } from "@trippler/tr_lib/nui"
-import type { ButtonStates, States } from "."
+import type { States } from "."
 import Button from "./button"
 import Dropdown from "./dropdown"
 
@@ -18,18 +18,16 @@ const Config = [
   { label: 'Quit', args: [ { placeholder: 'The reason for quitting', required: false } ] },
   { label: 'Story Mode' },
   { label: 'Game Volume', range: { min: 0, max: 100, unlimitedPositive: true } },
-  { label: 'Music Volume (SP)', range: { min: 0, max: 100, unlimitedPositive: true } },
-  { label: 'Music Volume', range: { min: 0, max: 100, unlimitedPositive: true } },
+  { label: 'Music Volume', radio: ["Singleplayer", "Multiplayer"], range: { min: 0, max: 100, unlimitedPositive: true } },
   { label: 'cmdlist' },
-  { label: 'Mini Console', args: [ { placeholder: '* = all messages | script:* = all messages from that script', required: true } ] },
+  { label: 'Mini Console', args: [ { placeholder: '* = all messages | script:* = all messages from all scripts', required: true } ] },
   { label: 'Developer Logging', boolean: true },
 ]
 
 export default ({ search }: { search: string | null }) => {
-  const [buttonsStates, setButtonsStates] = useState<ButtonStates>(null)
   const [states, setStates] = useState<States>(null)
 
-  function toggleState(..._args: unknown[]) {
+  function toggleState(..._howStupidXD: unknown[]) {
     setStates({ ...states, [arguments[0]]: !states?.[arguments[0]] })
     return !states?.[arguments[0]]
   }
@@ -43,8 +41,7 @@ export default ({ search }: { search: string | null }) => {
     {onClick: (Reason: string) => triggerNuiCallback('quit', { Reason })},
     {onClick: () => triggerNuiCallback('storymode')},
     {onClick: (Volume: number) => triggerNuiCallback('profile_sfxVolume', { Volume })},
-    {onClick: (Volume: number) => triggerNuiCallback('profile_musicVolume', { Volume })},
-    {onClick: (Volume: number) => triggerNuiCallback('profile_musicVolumeInMp', { Volume })},
+    {onClick: (Volume: number, Mode: string) => triggerNuiCallback('profile_musicVolumeInMp', { Volume, Mode })},
     {onClick: () => triggerNuiCallback('cmdlist')},
     {onClick: (Pattern: string) => triggerNuiCallback('con_miniconChannels', { Pattern })},
     {onClick: () => triggerNuiCallback('developer', { State: toggleState("Developer Logging") })},
@@ -63,10 +60,10 @@ export default ({ search }: { search: string | null }) => {
   )
 
   const itemsFound = filteredFeatures.map(feature => {
-    if (!feature.args && !feature.range) {
+    if (!feature.args && !feature.range && !feature.radio) {
       return <Button key={feature.label} style={feature?.boolean ? states?.[feature.label] ? "bg-green-500" : "bg-red-800" : undefined} {...feature} />
     } else {
-      return <Dropdown key={feature.label} {...feature} {...{ buttonsStates, setButtonsStates}} />
+      return <Dropdown key={feature.label} {...feature} />
     }
   })
   if (!itemsFound.length) {
