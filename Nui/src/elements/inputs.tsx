@@ -1,7 +1,7 @@
 import type { Feature } from "."
 
-export default ({ args }: { args: Feature["args"] }) => {
-  return args?.map(({ placeholder, required }, index) => 
+export default ({ args }: { args: Feature["args"] }) => (
+  args?.map(({ placeholder, required }, index) => 
     (
       <input
         key={index}
@@ -12,4 +12,4 @@ export default ({ args }: { args: Feature["args"] }) => {
       />
     )
   )
-}
+)
