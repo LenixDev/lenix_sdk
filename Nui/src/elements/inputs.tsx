@@ -1,6 +1,4 @@
-import type { Feature } from "."
-
-export default ({ args }: { args: Feature["args"] }) => (
+export default ({ args }: { args: unknown }) => (
   args?.map(({ placeholder, required }, index) => 
     (
       <input
