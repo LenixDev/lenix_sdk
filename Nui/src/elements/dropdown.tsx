@@ -24,12 +24,17 @@ export default ({
     }}>
       <button
         type='button'
-        onClick={() => setButtonsStates({ ...(keepOthersExpandedOnSelect ? buttonsStates : {}), [label]: !buttonsStates?.[label] })}
-      >{buttonsStates?.[label] ? `⬇︎ ${label} ⬇︎` : `→ ${label} ←`}</button>
-      {buttonsStates?.[label] && (
+        className={`${buttonsStates?.[label] ? 'bg-stone-400' : 'bg-stone-500'}`}
+        onClick={
+          () => setButtonsStates(
+            { ...(keepOthersExpandedOnSelect ? buttonsStates : {}), [label]: !buttonsStates?.[label] }
+          )
+        }
+        >{buttonsStates?.[label] ? `⬇︎ ${label} ⬇︎` : `→ ${label} ←`}</button>
+        {buttonsStates?.[label] && (
         <>
           <Inputs args={args} />
-          <button type='submit'>Submit</button>
+          <button type='submit' className="bg-blue-500">Submit</button>
         </>
       )}
     </form>
