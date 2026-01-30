@@ -9,6 +9,11 @@ export type Feature = {
     placeholder: string
     required: boolean
   }[]
+  range?: {
+    min: number, max: number
+    unlimitedPositive?: boolean
+  }
+  
 }
 
 export type States = Record<string, boolean> | null
