@@ -1,21 +1,16 @@
-import type { Feature } from "."
-
 export default ({
   label,
-  onClick,
   style,
   onMouseDown,
   stopHolding
 }: {
-  label: Feature["label"]
-  onClick: Feature["onClick"]
+  label: string
   style?: string
   onMouseDown?: () => void
   stopHolding?: () => void
 }) => (
   <button
     type='button'
-    onClick={onClick}
     className={style}
     onMouseDown={onMouseDown}
     onMouseLeave={stopHolding}
