@@ -18,14 +18,14 @@ const stopHolding = (timerRef: GetRef) => {
   clearInterval(timerRef.current)
 }
 
-export default ({ range }: { range: Config["dropdown"]["range"]["static"][string]["range"] }) => {
+export default ({ range: { min, max, unlimitedPositive } }: { range: Config["dropdown"]["range"]["static"][string]["range"] }) => {
   const [rangeValue, setRangeValue] = useState(0)
   const timerRef = useRef(0)
   return (
     <div className="flex flex-col items-center">
       <label htmlFor="range">{rangeValue.toFixed(1)}</label>
       <div className="flex gap-1">
-        {range.unlimitedPositive && (
+        {unlimitedPositive && (
             <Button
             label="-"
             style={style}
@@ -37,12 +37,12 @@ export default ({ range }: { range: Config["dropdown"]["range"]["static"][string
           id="range"
           type="range"
           step="0.1"
-          min={range.min}
-          max={range.max}
+          min={min}
+          max={max}
           value={rangeValue}
           onChange={({ target: { value } }) => setRangeValue(Number(value))}
         />
-        {range.unlimitedPositive && (
+        {unlimitedPositive && (
           <Button
             label="+"
             style={style}
