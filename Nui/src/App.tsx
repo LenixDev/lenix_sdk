@@ -54,13 +54,13 @@ const App = () => {
         static: {
           profile_sfxVolume: {
             label: 'Game Volume',
-            range: { min: 0, max: 100, unlimitedPositive: true },
+            range: { min: 0, max: 10, unlimitedPositive: true },
           },
         },
         radio: {
           profile_musicVolumeInMp: {
             label: 'Music Volume',
-            range: { min: 0, max: 100, unlimitedPositive: true },
+            range: { min: 0, max: 10, unlimitedPositive: true },
             radio: ["Singleplayer", "Multiplayer"],
           },
         }
