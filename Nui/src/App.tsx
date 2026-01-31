@@ -71,7 +71,7 @@ const App = () => {
   return (
     <Container>
       <Header/>
-      <SearchBar onChange={setSearch}/>
+      <SearchBar {...{setSearch}}/>
       <ButtonGroup>
         <Buttons {...{ search, CONFIG }}/>
       </ButtonGroup>
