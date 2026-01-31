@@ -75,7 +75,7 @@ export default ({ search, CONFIG }: { search: string | null, CONFIG: Config }) =
       case 'input':
       return Object.entries(feature).map(([key, { label, args }]) => {
         return (
-          <Dropdown key={key} {...{label, buttonsStates, setButtonsStates}}>
+          <Dropdown key={key} {...{ label, buttonsStates, setButtonsStates }}>
             <Inputs args={args} />
           </Dropdown>
         )
@@ -83,7 +83,7 @@ export default ({ search, CONFIG }: { search: string | null, CONFIG: Config }) =
       case 'staticRange':
       return Object.entries(feature).map(([key, { label, range }]) => {
         return (
-          <Dropdown key={key} {...{label, buttonsStates, setButtonsStates}}>
+          <Dropdown key={key} {...{ label, buttonsStates, setButtonsStates }}>
             <Range {...{ range }} />
           </Dropdown>
         )
@@ -91,7 +91,7 @@ export default ({ search, CONFIG }: { search: string | null, CONFIG: Config }) =
       case 'radio':
       return Object.entries(feature).map(([key, { label, range, radio }]) => {
         return (
-          <Dropdown key={key} {...{label, buttonsStates, setButtonsStates}}>
+          <Dropdown key={key} {...{ label, buttonsStates, setButtonsStates }}>
             <Radio {...{ radio }} />
             <Range {...{ range }} />
           </Dropdown>

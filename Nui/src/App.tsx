@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import './App.css'
-import Buttons from './elements/buttons'
+import Buttons from './elements/features'
 import Container from './elements/components/container'
 import Header from './elements/components/header'
 import SearchBar from './elements/components/search'
