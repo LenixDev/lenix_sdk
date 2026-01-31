@@ -1,6 +1,12 @@
+import type { Dispatch, SetStateAction } from "react"
+
 export const keepOthersExpandedOnSelect = false
 
 export type Children = React.ReactNode
+
+export type States = Record<string, boolean> | null
+export type ButtonStates = States
+export type SetState<S> = Dispatch<SetStateAction<S>>
 
 interface Range {
   min: number
@@ -42,6 +48,3 @@ export interface Config {
     }
   }
 }
-
-export type States = Record<string, boolean> | null
-export type ButtonStates = States
