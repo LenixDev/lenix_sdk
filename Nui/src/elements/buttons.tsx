@@ -1,5 +1,5 @@
 import { useState } from "react"
-import type { Config, States } from "."
+import type { ButtonStates, Config, States } from "."
 import Button from "./button"
 import Dropdown from "./dropdown"
 import Inputs from "./inputs"
@@ -8,8 +8,9 @@ import Radio from "./radio"
 
 export default ({ search, CONFIG }: { search: string | null, CONFIG: Config }) => {
   const [states, setStates] = useState<States>(null)
+  const [buttonsStates, setButtonsStates] = useState<ButtonStates>(null)
 
-  function toggleState(..._howAwkwardXD: unknown[]) {
+  function toggleBoolState(..._howAwkwardXD: unknown[]) {
     setStates({ ...states, [arguments[0]]: !states?.[arguments[0]] })
     return !states?.[arguments[0]]
   }
@@ -66,7 +67,7 @@ export default ({ search, CONFIG }: { search: string | null, CONFIG: Config }) =
       ))
       case 'dynamicButton':
       return Object.entries(feature).map(([key, label]) => {
-        const onMouseDown = () => toggleState(key)
+        const onMouseDown = () => toggleBoolState(key)
         const style = states?.[key] ? "bg-green-500" : "bg-red-500"
         return (
         <Button key={key} {...{ label, onMouseDown, style }} />
@@ -74,7 +75,7 @@ export default ({ search, CONFIG }: { search: string | null, CONFIG: Config }) =
       case 'input':
       return Object.entries(feature).map(([key, { label, args }]) => {
         return (
-          <Dropdown key={key} label={label}>
+          <Dropdown key={key} {...{label, buttonsStates, setButtonsStates}}>
             <Inputs args={args} />
           </Dropdown>
         )
@@ -82,7 +83,7 @@ export default ({ search, CONFIG }: { search: string | null, CONFIG: Config }) =
       case 'staticRange':
       return Object.entries(feature).map(([key, { label, range }]) => {
         return (
-          <Dropdown key={key} label={label}>
+          <Dropdown key={key} {...{label, buttonsStates, setButtonsStates}}>
             <Range {...{ range }} />
           </Dropdown>
         )
@@ -90,7 +91,7 @@ export default ({ search, CONFIG }: { search: string | null, CONFIG: Config }) =
       case 'radio':
       return Object.entries(feature).map(([key, { label, range, radio }]) => {
         return (
-          <Dropdown key={key} label={label}>
+          <Dropdown key={key} {...{label, buttonsStates, setButtonsStates}}>
             <Radio {...{ radio }} />
             <Range {...{ range }} />
           </Dropdown>
