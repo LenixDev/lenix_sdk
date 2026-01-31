@@ -1,10 +1,18 @@
-import { useState } from "react"
-import type { ButtonStates, Children } from "."
+import type { ButtonStates, Children, SetState } from "."
 import { keepOthersExpandedOnSelect } from "."
 import Button from "./button"
 
-export default ({ children, label }: { children: Children, label: string }) => {
-  const [buttonsStates, setButtonsStates] = useState<ButtonStates>(null)
+export default ({
+  children,
+  label,
+  buttonsStates,
+  setButtonsStates
+}: {
+  children: Children,
+  label: string,
+  buttonsStates: ButtonStates,
+  setButtonsStates: SetState<ButtonStates>
+}) => {
   return (
     <>
       <Button
