@@ -1,3 +1,5 @@
+import type { ButtonTypes } from ".."
+
 export default ({
   label,
   style,
@@ -7,7 +9,7 @@ export default ({
 }: {
   label: string
   style?: string
-  type?: React.ButtonHTMLAttributes<HTMLButtonElement>['type']
+  type?: ButtonTypes
   onMouseDown?: () => void
   stopHolding?: () => void
 }) => (

@@ -1,20 +1,17 @@
 import { useState, useRef } from "react"
 import Button from "./button"
-import type { Config } from ".."
+import type { Config, GetRef, SetState } from ".."
 
 const style = "px-2 bg-stone-600 rounded-md cursor-default"
 
-type SetState = React.Dispatch<React.SetStateAction<number>>
-type GetRef = React.RefObject<number>
-
-const startHolding = (direction: number, setRangeValue: SetState, timerRef: GetRef, rangeValue: number) => {
+const startHolding = (direction: number, setRangeValue: SetState<number>, timerRef: GetRef<number>, rangeValue: number) => {
   setRangeValue(rangeValue)
   timerRef.current = setInterval(() => {
     setRangeValue(prev => Math.max(0, prev + direction))
   }, 100)
 }
 
-const stopHolding = (timerRef: GetRef) => {
+const stopHolding = (timerRef: GetRef<number>) => {
   clearInterval(timerRef.current)
 }
 

@@ -7,6 +7,11 @@ export type Children = React.ReactNode
 export type States = Record<string, boolean> | null
 export type ButtonStates = States
 export type SetState<S> = Dispatch<SetStateAction<S>>
+export type ExecuteCallback = (data: string | string[]) => void
+export type InputArgs = Config["dropdown"]["input"][string]["args"]
+export type ButtonTypes = React.ButtonHTMLAttributes<HTMLButtonElement>['type']
+
+export type GetRef<T> = React.RefObject<T>
 
 interface Range {
   min: number

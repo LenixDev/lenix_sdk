@@ -1,10 +1,11 @@
 import { useState } from "react"
-import type { ButtonStates, Config, States } from "."
+import type { ButtonStates, Config, ExecuteCallback, States } from "."
 import Button from "./components/button"
 import Dropdown from "./components/dropdown"
 import Inputs from "./components/inputs"
 import Range from "./components/range"
 import Radio from "./components/radio"
+import { triggerNuiCallback } from "@trippler/tr_lib/nui"
 
 export default ({ search, CONFIG }: { search: string | null, CONFIG: Config }) => {
   const [states, setStates] = useState<States>(null)
@@ -16,7 +17,6 @@ export default ({ search, CONFIG }: { search: string | null, CONFIG: Config }) =
   }
 
   const searchLower = search ? search.toLowerCase() : ''
-
   const filteredConfig = {
     staticButton: Object.fromEntries(
       Object.entries(CONFIG.staticButton).filter(([_, val]) => 
@@ -59,24 +59,26 @@ export default ({ search, CONFIG }: { search: string | null, CONFIG: Config }) =
     ...(radio && { radio })
   }
 
+  const onClick: ExecuteCallback = (command: string | string[]) => triggerNuiCallback('execute', { command })
+
   return Object.entries(features).flatMap(([featureType, feature]) => {
     switch (featureType) {
       case 'staticButton':
       return Object.entries(feature).map(([key, label]) => (
-        <Button key={key} {...{ label }} />
+        <Button key={key} {...{ label, onMouseDown: () => onClick(key) }} />
       ))
       case 'dynamicButton':
       return Object.entries(feature).map(([key, label]) => {
         const onMouseDown = () => toggleBoolState(key)
         const style = states?.[key] ? "bg-green-500" : "bg-red-500"
         return (
-        <Button key={key} {...{ label, onMouseDown, style }} />
+          <Button key={key} {...{ label, onMouseDown, style, onClick: () => onClick(key + ' ' + states?.[key]) }} />
       )})
       case 'input':
       return Object.entries(feature).map(([key, { label, args }]) => {
         return (
           <Dropdown key={key} {...{ label, buttonsStates, setButtonsStates }}>
-            <Inputs args={args} />
+            <Inputs {...{ args, onClick } }  />
           </Dropdown>
         )
       })
