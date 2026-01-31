@@ -1,6 +1,6 @@
 import { useState, useRef } from "react"
 import Button from "./button"
-import type { Config } from "."
+import type { Config } from ".."
 
 const style = "px-2 bg-stone-600 rounded-md cursor-default"
 
@@ -26,7 +26,7 @@ export default ({ range: { min, max, unlimitedPositive } }: { range: Config["dro
       <label htmlFor="range">{rangeValue.toFixed(1)}</label>
       <div className="flex gap-1">
         {unlimitedPositive && (
-            <Button
+          <Button
             label="-"
             style={style}
             onMouseDown={() => startHolding(-1, setRangeValue, timerRef, rangeValue > 1 ? rangeValue - 1 : 0)}

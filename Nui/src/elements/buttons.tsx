@@ -1,10 +1,10 @@
 import { useState } from "react"
 import type { ButtonStates, Config, States } from "."
-import Button from "./button"
-import Dropdown from "./dropdown"
-import Inputs from "./inputs"
-import Range from "./range"
-import Radio from "./radio"
+import Button from "./components/button"
+import Dropdown from "./components/dropdown"
+import Inputs from "./components/inputs"
+import Range from "./components/range"
+import Radio from "./components/radio"
 
 export default ({ search, CONFIG }: { search: string | null, CONFIG: Config }) => {
   const [states, setStates] = useState<States>(null)

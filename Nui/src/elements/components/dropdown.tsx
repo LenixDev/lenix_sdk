@@ -1,5 +1,5 @@
-import type { ButtonStates, Children, SetState } from "."
-import { keepOthersExpandedOnSelect } from "."
+import type { ButtonStates, Children, SetState } from ".."
+import { keepOthersExpandedOnSelect } from ".."
 import Button from "./button"
 
 export default ({

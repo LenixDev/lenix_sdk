@@ -1,4 +1,4 @@
-import type { Config } from "."
+import type { Config } from ".."
 
 export default ({ radio } : { radio: Config["dropdown"]["range"]["radio"][string]["radio"] }) => (
   <div className="flex gap-1 justify-center">

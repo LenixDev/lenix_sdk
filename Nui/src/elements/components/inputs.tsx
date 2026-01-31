@@ -1,5 +1,5 @@
 import { triggerNuiCallback } from '@trippler/tr_lib/nui'
-import type { Config } from '.'
+import type { Config } from '..'
 import Button from './button'
 
 export default ({ args }: { args: Config["dropdown"]["input"][string]["args"] }) => (

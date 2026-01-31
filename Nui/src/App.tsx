@@ -1,10 +1,10 @@
 import { useState } from 'react'
 import './App.css'
 import Buttons from './elements/buttons'
-import Container from './elements/container'
-import Header from './elements/header'
-import SearchBar from './elements/search'
-import ButtonGroup from './elements/group'
+import Container from './elements/components/container'
+import Header from './elements/components/header'
+import SearchBar from './elements/components/search'
+import ButtonGroup from './elements/components/group'
 import type { Config } from './elements'
 
 const App = () => {
