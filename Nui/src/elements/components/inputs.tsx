@@ -1,11 +1,12 @@
-import type { ExecuteCallback, InputArgs } from '..'
+import type { InputArgs } from '..'
+import { onClick } from '../features'
 import Button from './button'
 
 export default ({
-  args, onClick
+  args, key
 }: {
   args: InputArgs
-  onClick: ExecuteCallback
+  key: string
 }) => (
   <form
     className={`flex flex-col`}
@@ -13,7 +14,7 @@ export default ({
       Event.preventDefault()
       const formData = new FormData(Event.currentTarget)
       const values = Array.from(formData.values())
-      onClick(values.map(value => String(value)))
+      onClick(key, values.map(value => String(value)))
     }
   }>
     {args?.map(({ placeholder, required }, index) => 
