@@ -19,10 +19,10 @@ const stopHolding = (timerRef: GetRef<number>) => {
 export default ({
   range: {
     min, max, unlimitedPositive
-  }, key
+  }, command
 }: {
   range: StaticRange
-  key: string
+  command: string
 }) => {
   const [rangeValue, setRangeValue] = useState(0)
   const timerRef = useRef(0)
@@ -45,7 +45,7 @@ export default ({
           min={min}
           max={max}
           value={rangeValue}
-          onChange={({ target: { value } }) => (setRangeValue(Number(value)), onClick(key, String(rangeValue)))}
+          onChange={({ target: { value } }) => (setRangeValue(Number(value)), onClick(command, String(rangeValue)))}
         />
         {unlimitedPositive && (
           <Button
