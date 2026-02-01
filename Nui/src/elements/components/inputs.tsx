@@ -3,10 +3,10 @@ import { onClick } from '../features'
 import Button from './button'
 
 export default ({
-  args, key
+  args, command
 }: {
   args: InputArgs
-  key: string
+  command: string
 }) => (
   <form
     className={`flex flex-col`}
@@ -14,7 +14,7 @@ export default ({
       Event.preventDefault()
       const formData = new FormData(Event.currentTarget)
       const values = Array.from(formData.values())
-      onClick(key, values.map(value => String(value)))
+      onClick(command, values.map(value => String(value)))
     }
   }>
     {args?.map(({ placeholder, required }, index) => 
