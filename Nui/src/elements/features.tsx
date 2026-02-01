@@ -7,6 +7,8 @@ import Range from "./components/range"
 import Radio from "./components/radio"
 import { triggerNuiCallback } from "@trippler/tr_lib/nui"
 
+export const onClick: ExecuteCallback<unknown> = (command: string, parameters?: string | string[]) => triggerNuiCallback('execute', { command, parameters })
+
 export default ({ search, CONFIG }: { search: string | null, CONFIG: Config }) => {
   const [states, setStates] = useState<States>(null)
   const [buttonsStates, setButtonsStates] = useState<ButtonStates>(null)
@@ -59,8 +61,6 @@ export default ({ search, CONFIG }: { search: string | null, CONFIG: Config }) =
     ...(radio && { radio })
   }
 
-  const onClick: ExecuteCallback = (command: string | string[]) => triggerNuiCallback('execute', { command })
-
   return Object.entries(features).flatMap(([featureType, feature]) => {
     switch (featureType) {
       case 'staticButton':
@@ -69,16 +69,16 @@ export default ({ search, CONFIG }: { search: string | null, CONFIG: Config }) =
       ))
       case 'dynamicButton':
       return Object.entries(feature).map(([key, label]) => {
-        const onMouseDown = () => toggleBoolState(key)
+        const onMouseDown = () => (toggleBoolState(key), onClick(key, String(states?.[key])))
         const style = states?.[key] ? "bg-green-500" : "bg-red-500"
         return (
-          <Button key={key} {...{ label, onMouseDown, style, onClick: () => onClick(key + ' ' + states?.[key]) }} />
+          <Button key={key} {...{ label, onMouseDown, style }} />
       )})
       case 'input':
       return Object.entries(feature).map(([key, { label, args }]) => {
         return (
           <Dropdown key={key} {...{ label, buttonsStates, setButtonsStates }}>
-            <Inputs {...{ args, onClick } }  />
+            <Inputs {...{ args, key } }  />
           </Dropdown>
         )
       })
@@ -86,19 +86,16 @@ export default ({ search, CONFIG }: { search: string | null, CONFIG: Config }) =
       return Object.entries(feature).map(([key, { label, range }]) => {
         return (
           <Dropdown key={key} {...{ label, buttonsStates, setButtonsStates }}>
-            <Range {...{ range }} />
+            <Range {...{ range, key }} />
           </Dropdown>
         )
       })
       case 'radio':
-      return Object.entries(feature).map(([key, { label, range, radio }]) => {
-        return (
-          <Dropdown key={key} {...{ label, buttonsStates, setButtonsStates }}>
-            <Radio {...{ radio }} />
-            <Range {...{ range }} />
-          </Dropdown>
-        )
-      })
+      return Object.entries(feature).map(([key, { label, range, radios }]) => (
+      <Dropdown key={key} {...{ label, buttonsStates, setButtonsStates }}>
+        <Radio {...{ radios, range, key }} />
+      </Dropdown>
+    ))
       default: {<div className="text-red-500">Configuration Error</div>}
     }
   })
