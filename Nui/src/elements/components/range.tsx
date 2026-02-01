@@ -1,6 +1,7 @@
 import { useState, useRef } from "react"
 import Button from "./button"
 import type { GetRef, SetState, StaticRange } from ".."
+import { onClick } from "../features"
 
 const style = "px-2 bg-stone-600 rounded-md cursor-default"
 
@@ -16,9 +17,12 @@ const stopHolding = (timerRef: GetRef<number>) => {
 }
 
 export default ({
-  range: { min, max, unlimitedPositive }
+  range: {
+    min, max, unlimitedPositive
+  }, key
 }: {
   range: StaticRange
+  key: string
 }) => {
   const [rangeValue, setRangeValue] = useState(0)
   const timerRef = useRef(0)
@@ -41,7 +45,7 @@ export default ({
           min={min}
           max={max}
           value={rangeValue}
-          onChange={({ target: { value } }) => setRangeValue(Number(value))}
+          onChange={({ target: { value } }) => (setRangeValue(Number(value)), onClick(key, String(rangeValue)))}
         />
         {unlimitedPositive && (
           <Button
