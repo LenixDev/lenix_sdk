@@ -1,15 +1,21 @@
-import { triggerNuiCallback } from '@trippler/tr_lib/nui'
-import type { Config } from '..'
+import type { ExecuteCallback, InputArgs } from '..'
 import Button from './button'
 
-export default ({ args }: { args: Config["dropdown"]["input"][string]["args"] }) => (
-  <form className={`flex flex-col`} onSubmit={Event => {
-    Event.preventDefault()
-    const formData = new FormData(Event.currentTarget)
-    const values = Array.from(formData.values())
-    console.error(...values)
-    triggerNuiCallback('execute', { Command: values.map(value => String(value))})
-  }}>
+export default ({
+  args, onClick
+}: {
+  args: InputArgs
+  onClick: ExecuteCallback
+}) => (
+  <form
+    className={`flex flex-col`}
+    onSubmit={Event => {
+      Event.preventDefault()
+      const formData = new FormData(Event.currentTarget)
+      const values = Array.from(formData.values())
+      onClick(values.map(value => String(value)))
+    }
+  }>
     {args?.map(({ placeholder, required }, index) => 
       (
         <input

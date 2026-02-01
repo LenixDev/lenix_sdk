@@ -10,6 +10,7 @@ export type SetState<S> = Dispatch<SetStateAction<S>>
 export type ExecuteCallback = (data: string | string[]) => void
 export type InputArgs = Config["dropdown"]["input"][string]["args"]
 export type ButtonTypes = React.ButtonHTMLAttributes<HTMLButtonElement>['type']
+export type StaticRange = Config["dropdown"]["range"]["static"][string]["range"]
 
 export type GetRef<T> = React.RefObject<T>
 

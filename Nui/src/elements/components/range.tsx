@@ -1,6 +1,6 @@
 import { useState, useRef } from "react"
 import Button from "./button"
-import type { Config, GetRef, SetState } from ".."
+import type { GetRef, SetState, StaticRange } from ".."
 
 const style = "px-2 bg-stone-600 rounded-md cursor-default"
 
@@ -15,7 +15,11 @@ const stopHolding = (timerRef: GetRef<number>) => {
   clearInterval(timerRef.current)
 }
 
-export default ({ range: { min, max, unlimitedPositive } }: { range: Config["dropdown"]["range"]["static"][string]["range"] }) => {
+export default ({
+  range: { min, max, unlimitedPositive }
+}: {
+  range: StaticRange
+}) => {
   const [rangeValue, setRangeValue] = useState(0)
   const timerRef = useRef(0)
   return (
