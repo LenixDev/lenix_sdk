@@ -57,13 +57,16 @@ const App = () => {
             range: { min: 0, max: 10, unlimitedPositive: true },
           },
         },
-        radio: {
-          profile_musicVolumeInMp: {
+        radio: [
+          {
             label: 'Music Volume',
             range: { min: 0, max: 10, unlimitedPositive: true },
-            radio: ["Singleplayer", "Multiplayer"],
+            radios: {
+              profile_musicVolume: "Singleplayer",
+              profile_musicVolumeInMp: "Multiplayer"
+            }
           },
-        }
+        ]
       }
     }
   } as const
