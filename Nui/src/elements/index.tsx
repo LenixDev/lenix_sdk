@@ -48,9 +48,11 @@ export interface Config {
       radio: Array<{
         label: string
         range: Range
-        radios: {
-          [key: string]: string
-        }
+        radios: Array<{
+          command: string,
+          label: string,
+          checked?: boolean
+        }>
       }>
     }
   }
