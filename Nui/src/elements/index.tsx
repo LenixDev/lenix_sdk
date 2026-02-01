@@ -7,10 +7,11 @@ export type Children = React.ReactNode
 export type States = Record<string, boolean> | null
 export type ButtonStates = States
 export type SetState<S> = Dispatch<SetStateAction<S>>
-export type ExecuteCallback = (data: string | string[]) => void
+export type ExecuteCallback<T> = (command: string, parameters?: string | string[]) => T
 export type InputArgs = Config["dropdown"]["input"][string]["args"]
 export type ButtonTypes = React.ButtonHTMLAttributes<HTMLButtonElement>['type']
 export type StaticRange = Config["dropdown"]["range"]["static"][string]["range"]
+export type Radios = Config["dropdown"]["range"]["radio"][number]["radios"]
 
 export type GetRef<T> = React.RefObject<T>
 
@@ -44,13 +45,13 @@ export interface Config {
           range: Range
         }
       }
-      radio: {
-        [key: string]: {
-          label: string
-          range: Range
-          radio: string[]
+      radio: Array<{
+        label: string
+        range: Range
+        radios: {
+          [key: string]: string
         }
-      }
+      }>
     }
   }
 }
