@@ -64,39 +64,35 @@ export default ({ search, CONFIG }: { search: string | null, CONFIG: Config }) =
   return Object.entries(features).flatMap(([featureType, feature]) => {
     switch (featureType) {
       case 'staticButton':
-      return Object.entries(feature).map(([key, label]) => (
-        <Button key={key} {...{ label, onMouseDown: () => onClick(key) }} />
+      return Object.entries(feature).map(([command, label]) => (
+        <Button key={command} {...{ label, onMouseDown: () => onClick(command) }} />
       ))
       case 'dynamicButton':
-      return Object.entries(feature).map(([key, label]) => {
-        const onMouseDown = () => (toggleBoolState(key), onClick(key, String(states?.[key])))
-        const style = states?.[key] ? "bg-green-500" : "bg-red-500"
+      return Object.entries(feature).map(([command, label]) => {
+        const onMouseDown = () => (toggleBoolState(command), onClick(command, String(states?.[command])))
+        const style = states?.[command] ? "bg-green-500" : "bg-red-500"
         return (
-          <Button key={key} {...{ label, onMouseDown, style }} />
-      )})
+          <Button key={command} {...{ label, onMouseDown, style }} />
+        )
+      })
       case 'input':
-      return Object.entries(feature).map(([key, { label, args }]) => {
-        return (
-          <Dropdown key={key} {...{ label, buttonsStates, setButtonsStates }}>
-            <Inputs {...{ args, key } }  />
-          </Dropdown>
-        )
-      })
+      return Object.entries(feature).map(([command, { label, args }]) => (
+        <Dropdown key={command} {...{ label, buttonsStates, setButtonsStates }}>
+          <Inputs {...{ args, command } }  />
+        </Dropdown>
+      ))
       case 'staticRange':
-      return Object.entries(feature).map(([key, { label, range }]) => {
-        return (
-          <Dropdown key={key} {...{ label, buttonsStates, setButtonsStates }}>
-            <Range {...{ range, key }} />
-          </Dropdown>
-        )
-      })
+      return Object.entries(feature).map(([command, { label, range }]) => (
+        <Dropdown key={command} {...{ label, buttonsStates, setButtonsStates }}>
+          <Range {...{ range, command }} />
+        </Dropdown>
+      ))
       case 'radio':
-      return Object.entries(feature).map(([key, { label, range, radios }]) => (
-      <Dropdown key={key} {...{ label, buttonsStates, setButtonsStates }}>
-        <Radio {...{ radios, range, key }} />
-      </Dropdown>
-    ))
-      default: {<div className="text-red-500">Configuration Error</div>}
+      return Object.entries(feature).map(([command, { label, range, radios }]) => (
+        <Dropdown key={command} {...{ label, buttonsStates, setButtonsStates }}>
+          <Radio {...{ radios, range }} />
+        </Dropdown>
+      ))
     }
   })
 }
