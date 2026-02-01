@@ -1,25 +1,33 @@
+import { useState } from "react"
 import type { Radios, StaticRange } from ".."
 import Range from "./range"
 
 export default ({
-  radios, range, key
+  radios, range
 } : {
   radios: Radios, 
   range: StaticRange
-  key: string
 }) => {
-  console.log(radios)
+  const initialCommand = Object.values(radios).find(r => r.checked)?.command || 'null';
+  const [selected, setSelected] = useState(initialCommand)
   return (
     <>
       <div className="flex gap-1 justify-center">
-        {Object.entries(radios).map(([option, label]) => (
-          <div key={option}>
-            <input type="radio" id={String(option)} name="name" value={option} />
-            <label htmlFor={String(option)}>{label}</label>
+        {Object.entries(radios).map(([_, { command, label, checked: _checked }]) => (
+          <div key={command}>
+            <input
+              type="radio"
+              id={String(command)}
+              name="name"
+              value={command}
+              checked={selected === command}
+              onChange={() => setSelected(command)}
+            />
+            <label htmlFor={String(command)}>{label}</label>
           </div>
         ))}
       </div>
-      <Range {...{ range, key }} />
+      <Range {...{ range, command: selected }} />
     </>
   )
 }
