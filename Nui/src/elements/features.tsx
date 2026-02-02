@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import type { ButtonStates, Config, ExecuteCallback, States } from "."
 import Button from "./components/button"
 import Dropdown from "./components/dropdown"
@@ -12,6 +12,15 @@ export const onClick: ExecuteCallback<unknown> = (command: string, parameters?: 
 export default ({ search, CONFIG }: { search: string | null, CONFIG: Config }) => {
   const [states, setStates] = useState<States>(null)
   const [buttonsStates, setButtonsStates] = useState<ButtonStates>(null)
+  const [isDarkMode, setIsDarkMode] = useState(false)
+
+  useEffect(() => {
+    const matcher = window.matchMedia('(prefers-color-scheme: dark)')
+    setIsDarkMode(matcher.matches)
+    const handler = ({ matches }: { matches: boolean }) => setIsDarkMode(matches)
+    matcher.addEventListener('change', handler)
+    return () => matcher.removeEventListener('change', handler)
+  }, [])
 
   function toggleBoolState(..._howAwkwardXD: unknown[]) {
     setStates({ ...states, [arguments[0]]: !states?.[arguments[0]] })
@@ -51,13 +60,13 @@ export default ({ search, CONFIG }: { search: string | null, CONFIG: Config }) =
     }
   } as const
 
-  const { staticButton, dynamicButton, dropdown: { input, range: { static: staticRange, radio } } } = filteredConfig
+  const { staticButton, dynamicButton, dropdown: { input, range: { static: range, radio } } } = filteredConfig
 
   const features = {
     ...(staticButton && { staticButton }),
     ...(dynamicButton && { dynamicButton }),
     ...(input && { input }),
-    ...(staticRange && { staticRange }),
+    ...(range && { range }),
     ...(radio && { radio })
   }
 
@@ -65,31 +74,31 @@ export default ({ search, CONFIG }: { search: string | null, CONFIG: Config }) =
     switch (featureType) {
       case 'staticButton':
       return Object.entries(feature).map(([command, label]) => (
-        <Button key={command} {...{ label, onMouseDown: () => onClick(command) }} />
+        <Button key={command} id={"StaticButton"} {...{ label, onMouseDown: () => onClick(command) }} />
       ))
       case 'dynamicButton':
       return Object.entries(feature).map(([command, label]) => {
         const onMouseDown = () => (toggleBoolState(command), onClick(command, String(states?.[command])))
         const style = states?.[command] ? "bg-green-500" : "bg-red-500"
         return (
-          <Button key={command} {...{ label, onMouseDown, style }} />
+          <Button key={command} id={"DynamicButton"} {...{ label, onMouseDown, style }} />
         )
       })
       case 'input':
       return Object.entries(feature).map(([command, { label, args }]) => (
-        <Dropdown key={command} {...{ label, buttonsStates, setButtonsStates }}>
+        <Dropdown key={command} id={"Input"} {...{ label, isDarkMode, buttonsStates, setButtonsStates }}>
           <Inputs {...{ args, command } }  />
         </Dropdown>
       ))
-      case 'staticRange':
+      case 'range':
       return Object.entries(feature).map(([command, { label, range }]) => (
-        <Dropdown key={command} {...{ label, buttonsStates, setButtonsStates }}>
+        <Dropdown key={command} id={"Range"} {...{ label, isDarkMode, buttonsStates, setButtonsStates }}>
           <Range {...{ range, command }} />
         </Dropdown>
       ))
       case 'radio':
       return Object.entries(feature).map(([command, { label, range, radios }]) => (
-        <Dropdown key={command} {...{ label, buttonsStates, setButtonsStates }}>
+        <Dropdown key={command} id={"Radio"} {...{ label, isDarkMode, buttonsStates, setButtonsStates }}>
           <Radio {...{ radios, range }} />
         </Dropdown>
       ))
