@@ -28,7 +28,7 @@ const App = () => {
           args: [
             { placeholder: 'The keyboard bind to use only when that resource is started', required: false },
             { placeholder: 'The keyboard bind to use', required: true },
-            { placeholder: 'The command to trigger', required: true }
+            { placeholder: 'The command to trigger', required: true, storageSave: 'unbind' }
           ],
         },
         unbind: {

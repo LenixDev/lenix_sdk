@@ -35,6 +35,7 @@ export interface Config {
         args?: {
           placeholder: string
           required?: boolean
+          storageSave?: string
         }[]
       }
     }
