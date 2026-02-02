@@ -10,3 +10,27 @@
 #Container {
   @apply bg-stone-500;
 }
+
+#Header {
+  @apply text-white;
+}
+
+#DynamicButton {
+  @apply text-white;
+}
+
+#StaticButton {
+  @apply text-white;
+}
+
+#Input {
+  @apply text-white;
+}
+
+#Range {
+  @apply text-white;
+}
+
+#Radio {
+  @apply text-white;
+}
