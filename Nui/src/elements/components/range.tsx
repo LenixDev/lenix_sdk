@@ -1,7 +1,9 @@
-import { useState, useRef } from "react"
+import { useState, useRef, useEffect } from "react"
 import Button from "./button"
 import type { GetRef, StaticRange } from ".."
 import { onClick } from "../features"
+
+const style = "px-2 bg-stone-600 rounded-md cursor-default"
 
 export default ({
   range: {
@@ -11,11 +13,10 @@ export default ({
   range: StaticRange
   command: string
 }) => {
-  const style = "px-2 bg-stone-600 rounded-md cursor-default"
-  
-  const [rangeValues, setRangeValues] = useState<Record<string, number>>({[command]: 5})
+  const defaultRange = (min + max) / 2
+  const [rangeValues, setRangeValues] = useState<Record<string, number>>({[command]: defaultRange})
   const timerRef = useRef(0)
-  
+
   const startHolding = (
     direction: number,
     rangeValue: number
@@ -29,10 +30,12 @@ export default ({
   const stopHolding = (timerRef: GetRef<number>) => {
     clearInterval(timerRef.current)
   }
-  rangeValues[command] = rangeValues[command] || 5
+  if (!rangeValues[command]) {
+    setRangeValues({...rangeValues, [command]: defaultRange})
+  }
   return (
     <div className="flex flex-col items-center">
-      <label htmlFor="range">{rangeValues[command].toFixed(1)}</label>
+      <label htmlFor="range">{rangeValues[command]?.toFixed(1)}</label>
       <div className="flex gap-1">
         {unlimitedPositive && (
           <Button
