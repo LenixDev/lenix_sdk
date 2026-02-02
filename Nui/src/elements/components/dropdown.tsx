@@ -14,22 +14,21 @@ export default ({
   id?: string,
   buttonsStates: ButtonStates,
   setButtonsStates: SetState<ButtonStates>
-}) => (
-  <>
-    <Button
-      id={id}
-      label={buttonsStates?.[label] ? `⬇︎ ${label} ⬇︎` : `→ ${label} ←`}
-      style={`${buttonsStates?.[label] ? 'bg-stone-400' : 'bg-stone-500'}`}
-      onMouseDown={
-        () => {
-        setButtonsStates({
-          ...(keepOthersExpandedOnSelect ? buttonsStates : {}),
-          [label]: !buttonsStates?.[label]
-        })
-      }}
-    />
-    {buttonsStates?.[label] && (
-      children
-    )}
-  </>
-)
+}) =>
+<>
+  <Button
+    id={id}
+    label={buttonsStates?.[label] ? `⬇︎ ${label} ⬇︎` : `→ ${label} ←`}
+    style={`${buttonsStates?.[label] ? 'bg-stone-400' : 'bg-stone-500'}`}
+    onMouseDown={
+      () => {
+      setButtonsStates({
+        ...(keepOthersExpandedOnSelect ? buttonsStates : {}),
+        [label]: !buttonsStates?.[label]
+      })
+    }}
+  />
+  {buttonsStates?.[label] && (
+    children
+  )}
+</>

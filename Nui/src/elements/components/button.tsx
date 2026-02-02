@@ -8,7 +8,7 @@ export default ({
   onMouseDown,
   stopHolding
 }: {
-  label: string
+  label?: string
   style?: string
   id?: string
   type?: ButtonTypes
