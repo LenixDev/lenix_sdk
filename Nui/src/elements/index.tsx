@@ -12,6 +12,7 @@ export type InputArgs = Config["dropdown"]["input"][string]["args"]
 export type ButtonTypes = React.ButtonHTMLAttributes<HTMLButtonElement>['type']
 export type StaticRange = Config["dropdown"]["range"]["static"][string]["range"]
 export type Radios = Config["dropdown"]["range"]["radio"][number]["radios"]
+export type GeneratedButtons = Record<string, string>
 
 export type GetRef<T> = React.RefObject<T>
 
