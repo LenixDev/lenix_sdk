@@ -8,7 +8,7 @@ export default ({
   radios: Radios, 
   range: StaticRange
 }) => {
-  const initialCommand = Object.values(radios).find(r => r.checked)?.command || 'null';
+  const initialCommand = Object.values(radios).find(r => r.checked)?.command || 'null'
   const [selected, setSelected] = useState(initialCommand)
   return (
     <>
