@@ -7,7 +7,7 @@ const style = "px-2 bg-stone-600 rounded-md cursor-default"
 type RangeValues = Record<string, number>
 
 const getStorage = (command: string, min: number, max: number): RangeValues => {
-  let storage = localStorage.getItem("rangeValues")
+  const storage = localStorage.getItem("rangeValue")
   if (storage) {
     return JSON.parse(storage)
   } else {
@@ -18,7 +18,7 @@ const getStorage = (command: string, min: number, max: number): RangeValues => {
   }
 }
 const saveStorage = (rangeValues: RangeValues) => {
-  localStorage.setItem("rangeValues", JSON.stringify(rangeValues))
+  localStorage.setItem("rangeValue", JSON.stringify(rangeValues))
 }
 
 export default ({
@@ -50,12 +50,11 @@ export default ({
   const stopHolding = (timerRef: GetRef<number>) => {
     clearInterval(timerRef.current)
   }
-  useEffect(() => {
-    if (rangeValues[command] === undefined) {
-      const stored = getStorage(command, min, max)
-      setRangeValues(prev => ({...prev, [command]: stored[command]}))
-    }
-  }, [command, min, max])
+  if (rangeValues[command] === undefined) {
+    const value = (min + max) / 2
+    saveStorage({...rangeValues, [command]: value})
+    setRangeValues(prev => ({...prev, [command]: value}))
+  }
 
   return (
     <div className="flex flex-col items-center">
