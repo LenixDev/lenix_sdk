@@ -9,3 +9,10 @@ server_script 'Server/bin/Release/**/publish/*.net.dll'
 author 'Lenix'
 version '0.0.1'
 description 'A SDK containing a bunch of features and utilities for Expert Scripting Programmers'
+
+ui_page 'dist/index.html'
+files {
+  'dist/index.html',
+  'dist/index-*.css',
+  'dist/index-*.js',
+}
