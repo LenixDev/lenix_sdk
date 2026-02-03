@@ -2,6 +2,7 @@ using System;
 using CitizenFX.Core;
 using static CitizenFX.Core.Native.API;
 using static lenix_sdk.Client.Modules;
+using System.Text.Json;
 
 public class Main : BaseScript
 {
@@ -11,13 +12,19 @@ public class Main : BaseScript
   }
   public Main()
   {
-    DefineCommand("sdk", () => Debug.WriteLine("sdk typed"));
+    DefineCommand("sdk", () =>
+    {
+      SendNuiMessage(JsonSerializer.Serialize(new {
+        action = "showMenu"
+      }));
+    });
     RegisterNuiCallback("execute", new Action<BindARGS, Action<bool>>((data, callback) =>
     {
       ExecuteCommand($"{data.Command}");
       callback(true);
     }));
-    //@deprecated
+
+    /* @deprecated */
     RegisterNuiCallback("getConfig", new Action<dynamic/* null */, Action<Config[]>>((data, callback) =>
     {
       Config[] config = Config.config;
