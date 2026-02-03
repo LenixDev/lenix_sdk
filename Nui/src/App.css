@@ -8,11 +8,8 @@
 }
 
 #Container {
-  @apply bg-stone-500;
-  color-scheme: light dark;
   color: rgba(0, 0, 0, 0.87);
   background-color: #ffffff;
-  @apply hidden;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -20,28 +17,4 @@
     background: #242424;
     color: rgba(255, 255, 255, 0.87);
   }
-}
-
-#Header {
-  @apply text-white;
-}
-
-#DynamicButton {
-  @apply text-white;
-}
-
-#StaticButton {
-  @apply text-white;
-}
-
-#Input {
-  @apply text-white;
-}
-
-#Range {
-  @apply text-white;
-}
-
-#Radio {
-  @apply text-white;
 }
