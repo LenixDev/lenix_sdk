@@ -14,11 +14,10 @@ public class Main : BaseScript
   {
     EventHandlers[ShowMenuEventName] += new Action(() =>
     {
-      SendNuiMessage(JsonConvert.SerializeObject(new {
-        action = "showMenu"
-      }));
+      SendNuiMessage("{\"__name\": \"showMenu\"}");
+      SetNuiFocus(true, true);
     });
-    TriggerServerEvent("defineTheCommand", "sdk", ShowMenuEventName);
+    TriggerServerEvent("defineCommand", "sdk", ShowMenuEventName);
     RegisterNuiCallback("execute", new Action<BindARGS, Action<bool>>((data, callback) =>
     {
       ExecuteCommand($"{data.Command}");
