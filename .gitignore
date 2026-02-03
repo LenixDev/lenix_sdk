@@ -4,6 +4,8 @@
 *.txt
 *.dgspec.json
 *.assets.json
+*.deps.json
+*.sourcelink.json
 *.editorconfig
 *.targets
 *.props
