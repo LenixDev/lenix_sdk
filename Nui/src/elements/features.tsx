@@ -19,7 +19,10 @@ import {
   StaticButton
 } from "./components/items"
 
-export const onClick: ExecuteCallback<unknown> = (command: string, parameters?: string | string[]) => triggerNuiCallback('execute', { command, parameters })
+export const onClick: ExecuteCallback<unknown> = (command: string, parameters?: string | string[]) => {
+  const RawCommand = `${command} ${parameters ? (Array.isArray(parameters) ? parameters.join(' ') : parameters) : ''}`
+  triggerNuiCallback('execute', { RawCommand })
+}
 
 const getFilteredConfig = (search: string | null, CONFIG: Config) => {
   const searchLower = search ? search.toLowerCase() : ''
