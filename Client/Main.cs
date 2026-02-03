@@ -1,7 +1,7 @@
 using System;
 using CitizenFX.Core;
 using static CitizenFX.Core.Native.API;
-using System.Text.Json;
+using Newtonsoft.Json;
 
 public class Main : BaseScript
 {
@@ -14,7 +14,7 @@ public class Main : BaseScript
   {
     EventHandlers[ShowMenuEventName] += new Action(() =>
     {
-      SendNuiMessage(JsonSerializer.Serialize(new {
+      SendNuiMessage(JsonConvert.SerializeObject(new {
         action = "showMenu"
       }));
     });
