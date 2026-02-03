@@ -18,7 +18,6 @@ import {
   RangeDropdown,
   StaticButton
 } from "./components/items"
-import { onNuiCallback } from '@trippler/tr_lib/nui'
 
 export const onClick: ExecuteCallback<unknown> = (command: string, parameters?: string | string[]) => triggerNuiCallback('execute', { command, parameters })
 
@@ -75,11 +74,6 @@ export default ({ search, CONFIG }: { search: string | null, CONFIG: Config }) =
   const [states, setStates] = useState<States>(null)
   const [buttonsStates, setButtonsStates] = useState<ButtonStates>(null)
   const [isDarkMode, setIsDarkMode] = useState(false)
-  const [displayState, setDisplayState] = useState(false)
-
-  onNuiCallback('showMenu', () => {
-    setDisplayState(true)
-  })
 
   useEffect(() => {
     const matcher = window.matchMedia('(prefers-color-scheme: dark)')
@@ -88,20 +82,6 @@ export default ({ search, CONFIG }: { search: string | null, CONFIG: Config }) =
     matcher.addEventListener('change', handler)
     return () => matcher.removeEventListener('change', handler)
   }, [])
-
-  useEffect(() => {
-    if (displayState) {
-      const handler = (e: KeyboardEvent) => {
-        if (e.key === 'Escape') {
-          setDisplayState(false)
-          document.removeEventListener('keydown', handler)
-        }
-      }
-      document.addEventListener('keydown', handler)
-    } else {
-      document.getElementById('root')?.classList.remove('hidden')
-    }
-  }, [displayState])
   
   function toggleBoolState(..._howAwkwardXD: unknown[]) {
     setStates({ ...states, [arguments[0]]: !states?.[arguments[0]] })
