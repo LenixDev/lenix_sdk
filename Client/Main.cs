@@ -5,11 +5,8 @@ using System.Collections.Generic;
 
 public class Main : BaseScript
 {
-  private class BindARGS
-  {
-    internal string Command { get; set; }
-  }
   private readonly string ShowMenuEventName = "showMenu";
+  private readonly string NuiCallbacksParameter = "Command";
   public Main()
   {
     EventHandlers[ShowMenuEventName] += new Action(() =>
@@ -20,7 +17,7 @@ public class Main : BaseScript
     TriggerServerEvent("defineTheCommand", "sdk", ShowMenuEventName);
     RegisterNuiCallback("execute", new Action<IDictionary<string, object>, CallbackDelegate>((data, callback) =>
     {
-        var command = data["Command"].ToString();
+        string command = data[NuiCallbacksParameter].ToString();
         ExecuteCommand(command);
         callback("ok");
     }));
