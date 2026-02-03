@@ -5,6 +5,7 @@
 #root {
   height: 100vh;
   display: flex;
+  @apply hidden;
 }
 
 #Container {

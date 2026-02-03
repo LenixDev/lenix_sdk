@@ -15,6 +15,8 @@ const App = () => {
       disconnect: 'Disconnect',
       storymode: 'Story Mode',
       cmdlist: 'cmdlist',
+      list_aces: 'Show ACEs',
+      list_principals: 'Show Principals',
     },
     dynamicButton: {
       drawfps: 'Toggle Fps',
