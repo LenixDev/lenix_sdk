@@ -1,12 +1,12 @@
 import { useState } from "react"
-import type { Radios, StaticRange } from ".."
+import type { RadiosType, StaticRangeType } from ".."
 import Range from "./range"
 
 export default ({
   radios, range
 } : {
-  radios: Radios, 
-  range: StaticRange
+  radios: RadiosType, 
+  range: StaticRangeType
 }) => {
   const initialCommand = Object.values(radios).find(r => r.checked)?.command || 'null'
   const [selected, setSelected] = useState(initialCommand)
