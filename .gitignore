@@ -12,5 +12,6 @@
 *.Up2Date
 *.AssemblyAttributes.cs
 *.AssemblyInfo.cs
+dist
 
 .DS_Store

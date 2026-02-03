@@ -13,7 +13,7 @@ export default ({
   return (
     <>
       <div className="flex gap-1 justify-center">
-        {Object.entries(radios).map(([_, { command, label, checked: _checked }]) => (
+        {Object.entries(radios).map(([, { command, label }]) => (
           <div key={command}>
             <input
               type="radio"
