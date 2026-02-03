@@ -6,7 +6,17 @@ import Inputs from "./inputs"
 import Radio from "./radio"
 import Range from "./range"
 
-export const StaticButton = ({ feature }: { feature: StaticButtonType }) => Object.entries(feature).map(([command, key], i) => <Button key={i} id={"StaticButton"} {...{ label: key, onMouseDown: () => onClick(command) }} />)
+export const StaticButton = ({
+  feature
+}: { feature: StaticButtonType }) =>
+  Object.entries(feature).map(([command, key], i) =>
+  <Button
+    key={i}
+    id={"StaticButton"}
+    style="text-white"
+    {...{ label: key, onMouseDown: () => onClick(command) }}
+    />
+  )
 
 export const DynamicButton = ({
   feature, toggleBoolState, states
@@ -17,7 +27,10 @@ export const DynamicButton = ({
 }) => Object.entries(feature).map(([command, key], i) => {
   const onMouseDown = () => (toggleBoolState(command), onClick(command, String(states?.[command])))
   const style = states?.[command] ? "bg-green-500" : "bg-red-500"
-  return <Button key={i} id={"DynamicButton"} {...{ label: key, onMouseDown, style }} />
+  return <Button
+    key={i}
+    {...{ label: key, onMouseDown, style: style + " text-white" }}
+  />
 })
 
 export const InputDropdown = ({ 
@@ -28,7 +41,11 @@ export const InputDropdown = ({
   buttonsStates: ButtonStates
   setButtonsStates: SetState<ButtonStates>
 }) => Object.entries(feature).map(([command, { label, args }], i) => (
-  <Dropdown key={i} id={"Input"} {...{ label, isDarkMode, buttonsStates, setButtonsStates }}>
+  <Dropdown
+    key={i}
+    style="text-white"
+    {...{ label, isDarkMode, buttonsStates, setButtonsStates }}
+  >
     <Inputs {...{ args, command } }  />
   </Dropdown>
 ))
@@ -41,7 +58,11 @@ export const RangeDropdown = ({
   buttonsStates: ButtonStates
   setButtonsStates: SetState<ButtonStates>
 }) => Object.entries(feature).map(([command, { label, range }], i) => (
-  <Dropdown key={i} id={"Range"} {...{ label, isDarkMode, buttonsStates, setButtonsStates }}>
+  <Dropdown
+    key={i}
+    style="text-white"
+    {...{ label, isDarkMode, buttonsStates, setButtonsStates }}
+  >
     <Range {...{ range, command }} />
   </Dropdown>
 ))
@@ -54,7 +75,11 @@ export const RadioDropdown = ({
   buttonsStates: ButtonStates
   setButtonsStates: SetState<ButtonStates>
 }) => Object.entries(feature).map(([, { label, range, radios }], i) => (
-  <Dropdown key={i} id={"Radio"} {...{ label, isDarkMode, buttonsStates, setButtonsStates }}>
+  <Dropdown 
+    key={i}
+    style="text-white"
+    {...{ label, isDarkMode, buttonsStates, setButtonsStates }}
+  >
     <Radio {...{ radios, range }} />
   </Dropdown>
 ))
