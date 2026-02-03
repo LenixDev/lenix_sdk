@@ -17,7 +17,7 @@ public class Main : BaseScript
     TriggerServerEvent("defineCommand", "sdk", ShowMenuEventName);
     RegisterNuiCallback("execute", new Action<IDictionary<string, object>, CallbackDelegate>((data, callback) =>
     {
-      string rawCommand = data[NuiCallbacksParameter];
+      string rawCommand = data[NuiCallbacksParameter].ToString();
       ExecuteCommand(rawCommand);
       callback("ok");
     }));
