@@ -8,14 +8,14 @@
 ### Mac
 ```bash
 brew install pnpm
-pnpm i
 cd Nui
+pnpm i
 pnpm run build
 ```
 ### Windows
 ```bash
 npm i -g pnpm@latest-10
-pnpm i
 cd Nui
+pnpm i
 pnpm run build
 ```
