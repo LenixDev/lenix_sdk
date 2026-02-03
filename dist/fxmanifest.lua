@@ -10,9 +10,9 @@ author 'Lenix'
 version '0.0.1'
 description 'A SDK containing a bunch of features and utilities for Expert Scripting Programmers'
 
-ui_page 'dist/index.html'
+ui_page 'Nui/dist/index.html'
 files {
-  'dist/index.html',
-  'dist/index-*.css',
-  'dist/index-*.js',
+  'Nui/dist/index.html',
+  'Nui/dist/assets/index-*.css',
+  'Nui/dist/assets/index-*.js',
 }

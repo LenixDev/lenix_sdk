@@ -2,7 +2,7 @@
 
 ## Backend
 1. install dotnet [link](https://dotnet.microsoft.com/en-us/download) if you don't have it
-2. run the build.cmd file
+2. run build.cmd
 
 ## NUI
 ### Mac
