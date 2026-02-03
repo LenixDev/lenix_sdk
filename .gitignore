@@ -1,17 +1,5 @@
-*.dll
-*.pdb
-*.cache
-*.txt
-*.dgspec.json
-*.assets.json
-*.deps.json
-*.sourcelink.json
-*.editorconfig
-*.targets
-*.props
-*.Up2Date
-*.AssemblyAttributes.cs
-*.AssemblyInfo.cs
+bin
+obj
 dist
 
 .DS_Store
