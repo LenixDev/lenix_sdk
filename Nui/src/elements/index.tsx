@@ -10,14 +10,14 @@ export type SetState<S> = Dispatch<SetStateAction<S>>
 export type ExecuteCallback<T> = (command: string, parameters?: string | string[]) => T
 export type InputArgs = Config["dropdown"]["input"][string]["args"]
 export type ButtonTypes = React.ButtonHTMLAttributes<HTMLButtonElement>['type']
-export type StaticRange = Config["dropdown"]["range"]["static"][string]["range"]
-export type Radios = Config["dropdown"]["range"]["radio"][number]["radios"]
+export type StaticRangeType = Config["dropdown"]["range"]["static"][string]["range"]
+export type RadiosType = Config["dropdown"]["range"]["radio"][number]["radios"]
 export type GeneratedButtons = Record<string, string>
-export type StaticButton = Config["staticButton"]
-export type DynamicButton = Config["dynamicButton"]
-export type InputDropdown = Config["dropdown"]["input"]
-export type RangeDropdown = Config["dropdown"]["range"]["static"]
-export type RadioDropdown = Config["dropdown"]["range"]["radio"]
+export type StaticButtonType = Config["staticButton"]
+export type DynamicButtonType = Config["dynamicButton"]
+export type InputDropdownType = Config["dropdown"]["input"]
+export type RangeDropdownType = Config["dropdown"]["range"]["static"]
+export type RadioDropdownType = Config["dropdown"]["range"]["radio"]
 
 export type GetRef<T> = React.RefObject<T>
 
