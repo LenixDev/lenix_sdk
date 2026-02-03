@@ -13,6 +13,11 @@ export type ButtonTypes = React.ButtonHTMLAttributes<HTMLButtonElement>['type']
 export type StaticRange = Config["dropdown"]["range"]["static"][string]["range"]
 export type Radios = Config["dropdown"]["range"]["radio"][number]["radios"]
 export type GeneratedButtons = Record<string, string>
+export type StaticButton = Config["staticButton"]
+export type DynamicButton = Config["dynamicButton"]
+export type InputDropdown = Config["dropdown"]["input"]
+export type RangeDropdown = Config["dropdown"]["range"]["static"]
+export type RadioDropdown = Config["dropdown"]["range"]["radio"]
 
 export type GetRef<T> = React.RefObject<T>
 
@@ -22,13 +27,13 @@ interface Range {
   unlimitedPositive?: boolean
 }
 
-interface Button {
-  [key: string]: string
-}
-
 export interface Config {
-  staticButton: Button
-  dynamicButton: Button
+  staticButton: {
+    [key: string]: string
+  }
+  dynamicButton: {
+    [key: string]: string
+  }
   dropdown: {
     input: {
       [key: string]: {
@@ -51,8 +56,8 @@ export interface Config {
         label: string
         range: Range
         radios: Array<{
-          command: string,
-          label: string,
+          command: string
+          label: string
           checked?: boolean
         }>
       }>
