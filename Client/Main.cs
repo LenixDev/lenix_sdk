@@ -1,7 +1,7 @@
 using System;
 using CitizenFX.Core;
 using static CitizenFX.Core.Native.API;
-using Newtonsoft.Json;
+using System.Collections.Generic;
 
 public class Main : BaseScript
 {
@@ -19,10 +19,11 @@ public class Main : BaseScript
       }));
     });
     TriggerServerEvent("defineTheCommand", "sdk", ShowMenuEventName);
-    RegisterNuiCallback("execute", new Action<BindARGS, Action<bool>>((data, callback) =>
+    RegisterNuiCallback("execute", new Action<IDictionary<string, object>, CallbackDelegate>((data, callback) =>
     {
-      ExecuteCommand($"{data.Command}");
-      callback(true);
+        var command = data["Command"].ToString();
+        ExecuteCommand(command);
+        callback("ok");
     }));
   }
 }
