@@ -26,29 +26,29 @@ const getFilteredConfig = (search: string | null, CONFIG: Config) => {
   const searchLower = search ? search.toLowerCase() : ''
   return {
     staticButton: Object.fromEntries(
-      Object.entries(CONFIG.staticButton).filter(([_, val]) => 
+      Object.entries(CONFIG.staticButton).filter(([, val]) => 
         !search || val.toLowerCase().includes(searchLower)
       )
     ),
     dynamicButton: Object.fromEntries(
-      Object.entries(CONFIG.dynamicButton).filter(([_, val]) => 
+      Object.entries(CONFIG.dynamicButton).filter(([, val]) => 
         !search || val.toLowerCase().includes(searchLower)
       )
     ),
     dropdown: {
       input: Object.fromEntries(
-        Object.entries(CONFIG.dropdown.input).filter(([_, data]) => 
+        Object.entries(CONFIG.dropdown.input).filter(([, data]) => 
           !search || data.label.toLowerCase().includes(searchLower)
         )
       ),
       range: {
         static: Object.fromEntries(
-          Object.entries(CONFIG.dropdown.range.static).filter(([_, data]) => 
+          Object.entries(CONFIG.dropdown.range.static).filter(([, data]) => 
             !search || data.label.toLowerCase().includes(searchLower)
           )
         ),
         radio: Object.fromEntries(
-          Object.entries(CONFIG.dropdown.range.radio).filter(([_, data]) => 
+          Object.entries(CONFIG.dropdown.range.radio).filter(([, data]) => 
             !search || data.label.toLowerCase().includes(searchLower)
           )
         )
