@@ -1,7 +1,7 @@
 import type { Children } from ".."
 
-export default ({ children }: { children: Children }) => (
-  <div id="Container" className={`rounded-md overflow-hidden m-auto`}>
+export default ({ children, displayState }: { children: Children, displayState: boolean }) => (
+  <div id="Container" className={`${displayState ? '' : 'hidden'} scheme-light-dark bg-stone-500 rounded-md overflow-hidden m-auto`}>
     { children }
   </div>
 )

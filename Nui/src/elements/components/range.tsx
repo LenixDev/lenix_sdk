@@ -17,6 +17,7 @@ const getStorage = (command: string, min: number, max: number): RangeValues => {
     return getStorage(command, min, max)
   }
 }
+
 const saveStorage = (rangeValues: RangeValues) => {
   localStorage.setItem("rangeValue", JSON.stringify(rangeValues))
 }
