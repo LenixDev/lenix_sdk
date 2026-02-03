@@ -14,7 +14,7 @@ public class Main : BaseScript
       SendNuiMessage("{\"__name\": \"showMenu\"}");
       SetNuiFocus(true, true);
     });
-    TriggerServerEvent("defineTheCommand", "sdk", ShowMenuEventName);
+    TriggerServerEvent("defineCommand", "sdk", ShowMenuEventName);
     RegisterNuiCallback("execute", new Action<IDictionary<string, object>, CallbackDelegate>((data, callback) =>
     {
         string command = data[NuiCallbacksParameter].ToString();
