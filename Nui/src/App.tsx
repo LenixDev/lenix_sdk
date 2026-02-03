@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './App.css'
 import Buttons from './elements/features'
 import Container from './elements/components/container'
@@ -6,9 +6,11 @@ import Header from './elements/components/header'
 import SearchBar from './elements/components/search'
 import ButtonGroup from './elements/components/group'
 import type { Config } from './elements'
+import { onNuiCallback } from '@trippler/tr_lib/nui'
 
 const App = () => {
   const [search, setSearch] = useState<string | null>(null)
+  const [displayState, setDisplayState] = useState(false)
 
   const CONFIG: Config = {
     staticButton: {
@@ -80,8 +82,21 @@ const App = () => {
     }
   } as const
 
+  onNuiCallback('showMenu', () => setDisplayState(true))
+ 
+  useEffect(() => {
+    if (displayState) return
+    const handler = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setDisplayState(false)
+        document.removeEventListener('keydown', handler)
+      }
+    }
+    document.addEventListener('keydown', handler)
+  }, [displayState])
+
   return (
-    <Container>
+    <Container {...{ displayState }}>
       <Header/>
       <SearchBar {...{setSearch}}/>
       <ButtonGroup>
