@@ -6,7 +6,6 @@ import Header from './elements/components/header'
 import SearchBar from './elements/components/search'
 import ButtonGroup from './elements/components/group'
 import type { Config } from './elements'
-import { onNuiCallback } from '@trippler/tr_lib/nui'
 
 const App = () => {
   const [search, setSearch] = useState<string | null>(null)
@@ -21,8 +20,8 @@ const App = () => {
       list_principals: 'Show Principals',
     },
     dynamicButton: {
-      drawfps: 'Toggle Fps',
-      drawperf: 'Toggle Performance',
+      cl_drawfps: 'Toggle Fps',
+      cl_drawperf: 'Toggle Performance',
       developer: 'Developer Logging',
     },
     dropdown: {
@@ -82,14 +81,21 @@ const App = () => {
     }
   } as const
 
-  onNuiCallback('showMenu', () => setDisplayState(true))
- 
+  window.addEventListener('message', ({ data: { action } }) => action === 'showMenu' && setDisplayState(true))
+
   useEffect(() => {
-    if (displayState) return
+    if (!displayState) return
     const handler = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
         setDisplayState(false)
         document.removeEventListener('keydown', handler)
+        fetch(`https://${GetParentResourceName()}/hideMenu`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json; charset=UTF-8',
+            },
+            body: JSON.stringify({}),
+        });
       }
     }
     document.addEventListener('keydown', handler)
@@ -98,7 +104,7 @@ const App = () => {
   return (
     <Container {...{ displayState }}>
       <Header/>
-      <SearchBar {...{setSearch}}/>
+      <SearchBar {...{ setSearch }}/>
       <ButtonGroup>
         <Buttons {...{ search, CONFIG }}/>
       </ButtonGroup>
