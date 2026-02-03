@@ -40,8 +40,8 @@ export default ({
             })
           }
         }
-      }
-    }>
+      }}
+    >
       {args?.map(({ placeholder, required }, index) => 
         <input
           key={index}
@@ -53,7 +53,7 @@ export default ({
       )}
       {getStoredButton(command) && 
         <Button {...{
-          label: getStoredButton(command),
+          label: `${getStoredButton(command)}: ${command}`,
           onMouseDown: () => {
             removeStorageButton(command)
             onClick(command, getStoredButton(command))
