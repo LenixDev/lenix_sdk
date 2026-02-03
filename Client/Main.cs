@@ -6,20 +6,25 @@ using System.Collections.Generic;
 public class Main : BaseScript
 {
   private readonly string ShowMenuEventName = "showMenu";
-  private readonly string NuiCallbacksParameter = "Command";
+  private readonly string NuiCallbacksParameter = "RawCommand";
   public Main()
   {
     EventHandlers[ShowMenuEventName] += new Action(() =>
     {
-      SendNuiMessage("{\"__name\": \"showMenu\"}");
+      SendNuiMessage("{\"action\": \"showMenu\"}");
       SetNuiFocus(true, true);
     });
     TriggerServerEvent("defineCommand", "sdk", ShowMenuEventName);
     RegisterNuiCallback("execute", new Action<IDictionary<string, object>, CallbackDelegate>((data, callback) =>
     {
-        string command = data[NuiCallbacksParameter].ToString();
-        ExecuteCommand(command);
-        callback("ok");
+      string rawCommand = data[NuiCallbacksParameter];
+      ExecuteCommand(rawCommand);
+      callback("ok");
+    }));
+    RegisterNuiCallback("hideMenu", new Action<IDictionary<string, object>, CallbackDelegate>((data, callback) =>
+    {
+      SetNuiFocus(false, false);
+      callback("ok");
     }));
   }
 }
