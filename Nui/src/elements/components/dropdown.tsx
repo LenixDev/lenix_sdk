@@ -6,16 +6,18 @@ export default ({
   children,
   label,
   id,
+  style,
   buttonsStates,
   setButtonsStates
 }: {
   children: Children,
   label: string,
   id?: string,
+  style?: string,
   buttonsStates: ButtonStates,
   setButtonsStates: SetState<ButtonStates>
 }) =>
-<>
+<div className={style}>
   <Button
     id={id}
     label={buttonsStates?.[label] ? `⬇︎ ${label} ⬇︎` : `→ ${label} ←`}
@@ -31,4 +33,4 @@ export default ({
   {buttonsStates?.[label] && (
     children
   )}
-</>
+</div>
