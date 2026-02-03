@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react"
 import Button from "./button"
-import type { GetRef, StaticRange } from ".."
+import type { GetRef, StaticRangeType } from ".."
 import { onClick } from "../features"
 
 const style = "px-2 bg-stone-600 rounded-md cursor-default"
@@ -26,7 +26,7 @@ export default ({
     min, max, unlimitedPositive
   }, command
 }: {
-  range: StaticRange
+  range: StaticRangeType
   command: string
 }) => {
   const defaultRanges = getStorage(command, min, max)
