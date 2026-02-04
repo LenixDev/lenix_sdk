@@ -4,7 +4,7 @@ import Container from './elements/components/container'
 import Header from './elements/components/header'
 import SearchBar from './elements/components/search'
 import ButtonGroup from './elements/components/group'
-import type { Config, States } from './elements'
+import type { Config, States } from './types'
 import ResetButton from './elements/components/reset'
 import StaticButtons from './elements/staticButton'
 import DynamicButtons from './elements/dynamicButton'
@@ -89,41 +89,6 @@ const App = () => {
     }
   } as const
 
-  const getFilteredConfig = (search: string | null, CONFIG: Config) => {
-    const searchLower = search ? search.toLowerCase() : ''
-    return {
-      staticButton: Object.fromEntries(
-        Object.entries(CONFIG.staticButton).filter(([, val]) => 
-          !search || val.toLowerCase().includes(searchLower)
-        )
-      ),
-      dynamicButton: Object.fromEntries(
-        Object.entries(CONFIG.dynamicButton).filter(([, val]) => 
-          !search || val.toLowerCase().includes(searchLower)
-        )
-      ),
-      dropdown: {
-        input: Object.fromEntries(
-          Object.entries(CONFIG.dropdown.input).filter(([, data]) => 
-            !search || data.label.toLowerCase().includes(searchLower)
-          )
-        ),
-        range: {
-          static: Object.fromEntries(
-            Object.entries(CONFIG.dropdown.range.static).filter(([, data]) => 
-              !search || data.label.toLowerCase().includes(searchLower)
-            )
-          ),
-          radio: Object.fromEntries(
-            Object.entries(CONFIG.dropdown.range.radio).filter(([, data]) => 
-              !search || data.label.toLowerCase().includes(searchLower)
-            )
-          )
-        }
-      }
-    } as const
-  }
-
   useEffect(() => {
     const matcher = getMatcher()
     const handler = ({ matches }: { matches: boolean }) => setIsDarkMode(matches)
@@ -149,17 +114,38 @@ const App = () => {
     }
     document.addEventListener('keydown', handler)
   }, [displayState])
-  const {
-    staticButton, 
-    dynamicButton,
-    dropdown: {
-      input,
-      range: {
-        static: range,
-        radio,
-      },
+
+  const searchLower = search ? search.toLowerCase() : ''
+  const staticButton = Object.fromEntries(
+    Object.entries(CONFIG.staticButton).filter(([, val]) => 
+      !search || val.toLowerCase().includes(searchLower)
+    )
+  )
+  const dynamicButton = Object.fromEntries(
+    Object.entries(CONFIG.dynamicButton).filter(([, val]) => 
+      !search || val.toLowerCase().includes(searchLower)
+    )
+  )
+  const dropdown = {
+    input: Object.fromEntries(
+      Object.entries(CONFIG.dropdown.input).filter(([, data]) => 
+        !search || data.label.toLowerCase().includes(searchLower)
+      )
+    ),
+    range: {
+      static: Object.fromEntries(
+        Object.entries(CONFIG.dropdown.range.static).filter(([, data]) => 
+          !search || data.label.toLowerCase().includes(searchLower)
+        )
+      ),
+      radio: Object.fromEntries(
+        Object.entries(CONFIG.dropdown.range.radio).filter(([, data]) => 
+          !search || data.label.toLowerCase().includes(searchLower)
+        )
+      )
     }
-  } = getFilteredConfig(search, CONFIG)
+  } as const
+
   const features = {
     staticButton: Object.entries({
       ...(staticButton && { staticButton }),
@@ -168,15 +154,15 @@ const App = () => {
       ...(dynamicButton && { dynamicButton }),
     }),
     input: Object.entries({
-      ...(input && { input }),
+      ...(dropdown.input && { input: dropdown.input }),
     }),
     range: Object.entries({
-      ...(range && { range }),
+      ...(dropdown.range.static && { range: dropdown.range.static }),
     }),
     radio: Object.entries({
-      ...(radio && { radio }),
+      ...(dropdown.range.radio && { radio: dropdown.range.radio }),
     }),
-  }
+  } as const
 
   const staticButtonFeature = features.staticButton.flatMap(([, feature]) => {
     return Object.entries(feature)
