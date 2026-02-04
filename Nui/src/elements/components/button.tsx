@@ -1,6 +1,6 @@
 import type { ButtonTypes } from ".."
 
-export default ({
+export const Button = ({
   label,
   style,
   id,
@@ -24,3 +24,5 @@ export default ({
     onMouseUp={stopHolding}
   >{label}</button>
 )
+
+export default Button

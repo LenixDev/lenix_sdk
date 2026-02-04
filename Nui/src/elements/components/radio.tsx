@@ -2,7 +2,7 @@ import { useState } from "react"
 import type { RadiosType, StaticRangeType } from ".."
 import Range from "./range"
 
-export default ({
+export const Radio = ({
   radios, range
 } : {
   radios: RadiosType, 
@@ -31,3 +31,5 @@ export default ({
     </>
   )
 }
+
+export default Radio

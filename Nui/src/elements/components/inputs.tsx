@@ -14,8 +14,7 @@ const removeStorageButton = (command: string) => {
   localStorage.setItem('generatedButtons', JSON.stringify({ ...getStoredButtons(), [command]: undefined }))
 }
 
-
-export default ({
+export const Inputs = ({
   args, command
 }: {
   args: InputArgs
@@ -65,3 +64,5 @@ export default ({
     </form>
   )
 }
+
+export default Inputs
