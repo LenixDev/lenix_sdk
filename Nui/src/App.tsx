@@ -89,6 +89,67 @@ const App = () => {
     }
   } as const
 
+  const searchLower = search ? search.toLowerCase() : ''
+  const staticButtons = Object.fromEntries(
+    Object.entries(CONFIG.staticButton).filter(([, val]) => 
+      !search || val.toLowerCase().includes(searchLower)
+    )
+  )
+  const dynamicButtons = Object.fromEntries(
+    Object.entries(CONFIG.dynamicButton).filter(([, val]) => 
+      !search || val.toLowerCase().includes(searchLower)
+    )
+  )
+  const dropdown = {
+    inputs: Object.fromEntries(
+      Object.entries(CONFIG.dropdown.input).filter(([, data]) => 
+        !search || data.label.toLowerCase().includes(searchLower)
+      )
+    ),
+    ranges: {
+      statics: Object.fromEntries(
+        Object.entries(CONFIG.dropdown.range.static).filter(([, data]) => 
+          !search || data.label.toLowerCase().includes(searchLower)
+        )
+      ),
+      radios: Object.fromEntries(
+        Object.entries(CONFIG.dropdown.range.radio).filter(([, data]) => 
+          !search || data.label.toLowerCase().includes(searchLower)
+        )
+      )
+    }
+  } as const
+
+  const staticButtonFeatures = Object.entries({
+    ...(staticButtons && { staticButton: staticButtons }),
+  }).flatMap(([, feature]) => {
+    return Object.entries(feature)
+  })
+
+  const dynamicButtonFeatures = Object.entries({
+    ...(dynamicButtons && { dynamicButton: dynamicButtons }),
+  }).flatMap(([, feature]) => {
+    return Object.entries(feature)
+  })
+
+  const inputFeatures = Object.entries({
+    ...(dropdown.inputs && { input: dropdown.inputs }),
+  }).flatMap(([, feature]) => {
+    return Object.entries(feature)
+  })
+
+  const rangeFeatures = Object.entries({
+    ...(dropdown.ranges.statics && { range: dropdown.ranges.statics }),
+  }).flatMap(([, feature]) => {
+    return Object.entries(feature)
+  })
+
+  const radioFeatures = Object.entries({
+    ...(dropdown.ranges.radios && { radio: dropdown.ranges.radios }),
+  }).flatMap(([, feature]) => {
+    return Object.entries(feature)
+  })
+
   useEffect(() => {
     const matcher = getMatcher()
     const handler = ({ matches }: { matches: boolean }) => setIsDarkMode(matches)
@@ -115,78 +176,17 @@ const App = () => {
     document.addEventListener('keydown', handler)
   }, [displayState])
 
-  const searchLower = search ? search.toLowerCase() : ''
-  const staticButton = Object.fromEntries(
-    Object.entries(CONFIG.staticButton).filter(([, val]) => 
-      !search || val.toLowerCase().includes(searchLower)
-    )
-  )
-  const dynamicButton = Object.fromEntries(
-    Object.entries(CONFIG.dynamicButton).filter(([, val]) => 
-      !search || val.toLowerCase().includes(searchLower)
-    )
-  )
-  const dropdown = {
-    input: Object.fromEntries(
-      Object.entries(CONFIG.dropdown.input).filter(([, data]) => 
-        !search || data.label.toLowerCase().includes(searchLower)
-      )
-    ),
-    range: {
-      static: Object.fromEntries(
-        Object.entries(CONFIG.dropdown.range.static).filter(([, data]) => 
-          !search || data.label.toLowerCase().includes(searchLower)
-        )
-      ),
-      radio: Object.fromEntries(
-        Object.entries(CONFIG.dropdown.range.radio).filter(([, data]) => 
-          !search || data.label.toLowerCase().includes(searchLower)
-        )
-      )
-    }
-  } as const
-
-  const staticButtonFeature = Object.entries({
-    ...(staticButton && { staticButton }),
-  }).flatMap(([, feature]) => {
-    return Object.entries(feature)
-  })
-
-  const dynamicButtonFeature = Object.entries({
-    ...(dynamicButton && { dynamicButton }),
-  }).flatMap(([, feature]) => {
-    return Object.entries(feature)
-  })
-
-  const inputFeature = Object.entries({
-    ...(dropdown.input && { input: dropdown.input }),
-  }).flatMap(([, feature]) => {
-    return Object.entries(feature)
-  })
-
-  const rangeFeature = Object.entries({
-    ...(dropdown.range.static && { range: dropdown.range.static }),
-  }).flatMap(([, feature]) => {
-    return Object.entries(feature)
-  })
-
-  const radioFeature = Object.entries({
-    ...(dropdown.range.radio && { radio: dropdown.range.radio }),
-  }).flatMap(([, feature]) => {
-    return Object.entries(feature)
-  })
-
   return (
     <Container {...{ displayState }}>
       <Header/>
       <ResetButton/>
       <SearchBar {...{ setSearch }}/>
       <ButtonGroup>
-        <StaticButtons {...{ feature: staticButtonFeature }} />
-        <DynamicButtons {...{ feature: dynamicButtonFeature }} />
-        <DropdownInputs {...{ feature: inputFeature, isDarkMode, buttonsStates, setButtonsStates }} />
-        <DropdownRanges {...{ feature: rangeFeature, isDarkMode, buttonsStates, setButtonsStates }} />
-        <DropdownRadios {...{ feature: radioFeature, isDarkMode, buttonsStates, setButtonsStates }} />
+        <StaticButtons {...{ feature: staticButtonFeatures }} />
+        <DynamicButtons {...{ feature: dynamicButtonFeatures }} />
+        <DropdownInputs {...{ feature: inputFeatures, isDarkMode, buttonsStates, setButtonsStates }} />
+        <DropdownRanges {...{ feature: rangeFeatures, isDarkMode, buttonsStates, setButtonsStates }} />
+        <DropdownRadios {...{ feature: radioFeatures, isDarkMode, buttonsStates, setButtonsStates }} />
       </ButtonGroup>
     </Container>
   )
