@@ -18,6 +18,8 @@ export type DynamicButtonType = Config["dynamicButton"]
 export type InputDropdownType = Config["dropdown"]["input"]
 export type RangeDropdownType = Config["dropdown"]["range"]["static"]
 export type RadioDropdownType = Config["dropdown"]["range"]["radio"]
+export type RangeValuesType = Record<string, number>
+
 
 export type GetRef<T> = React.RefObject<T>
 
