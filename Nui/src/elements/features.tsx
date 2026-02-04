@@ -59,7 +59,7 @@ const getFilteredConfig = (search: string | null, CONFIG: Config) => {
   } as const
 }
 
-export default ({ search, CONFIG }: { search: string | null, CONFIG: Config }) => {
+export const Features = ({ search, CONFIG }: { search: string | null, CONFIG: Config }) => {
   const { staticButton, dynamicButton, dropdown: {
     input, range: {
       static: range,
@@ -86,9 +86,9 @@ export default ({ search, CONFIG }: { search: string | null, CONFIG: Config }) =
     return () => matcher.removeEventListener('change', handler)
   }, [])
   
-  function toggleBoolState(..._howAwkwardXD: unknown[]) {
-    setStates({ ...states, [arguments[0]]: !states?.[arguments[0]] })
-    return !states?.[arguments[0]]
+  const toggleBoolState = (command: string) => {
+    setStates({ ...states, [command]: !states?.[command] })
+    return !states?.[command]
   }
 
   return features().flatMap(([featureType, feature], i) => {
@@ -110,3 +110,5 @@ export default ({ search, CONFIG }: { search: string | null, CONFIG: Config }) =
     }
   })
 }
+
+export default Features
