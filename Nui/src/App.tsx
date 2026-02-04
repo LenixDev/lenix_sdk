@@ -6,11 +6,11 @@ import SearchBar from './elements/components/search'
 import Groups from './elements/components/group'
 import type { Config, States } from './types'
 import ResetButton from './elements/components/reset'
-import StaticButtons from './elements/staticButton'
-import DynamicButtons from './elements/dynamicButton'
-import DropdownInputs from './elements/dropdownInputs'
-import DropdownRanges from './elements/dropdownRange'
-import DropdownRadios from './elements/dropdownRadio'
+import StaticButtons from './elements/staticButtons'
+import DynamicButtons from './elements/dynamicButtons'
+import DropdownInputs from './elements/InputsDropdown'
+import DropdownRanges from './elements/rangesDropdown'
+import DropdownRadios from './elements/radiosDropdown'
 
 const App = () => {
   const [search, setSearch] = useState<string | null>(null)
