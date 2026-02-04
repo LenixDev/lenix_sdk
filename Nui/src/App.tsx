@@ -100,7 +100,7 @@ const App = () => {
       !search || val.toLowerCase().includes(searchLower)
     )
   )
-  const dropdown = {
+  const { inputs, ranges } = {
     inputs: Object.fromEntries(
       Object.entries(CONFIG.dropdown.input).filter(([, data]) => 
         !search || data.label.toLowerCase().includes(searchLower)
@@ -133,19 +133,19 @@ const App = () => {
   })
 
   const inputFeatures = Object.entries({
-    ...(dropdown.inputs && { input: dropdown.inputs }),
+    ...(inputs && { input: inputs }),
   }).flatMap(([, feature]) => {
     return Object.entries(feature)
   })
 
   const rangeFeatures = Object.entries({
-    ...(dropdown.ranges.statics && { range: dropdown.ranges.statics }),
+    ...(ranges.statics && { range: ranges.statics }),
   }).flatMap(([, feature]) => {
     return Object.entries(feature)
   })
 
   const radioFeatures = Object.entries({
-    ...(dropdown.ranges.radios && { radio: dropdown.ranges.radios }),
+    ...(ranges.radios && { radio: ranges.radios }),
   }).flatMap(([, feature]) => {
     return Object.entries(feature)
   })
