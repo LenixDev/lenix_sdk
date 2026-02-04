@@ -146,41 +146,33 @@ const App = () => {
     }
   } as const
 
-  const features = {
-    staticButton: Object.entries({
-      ...(staticButton && { staticButton }),
-    }),
-    dynamicButton: Object.entries({
-      ...(dynamicButton && { dynamicButton }),
-    }),
-    input: Object.entries({
-      ...(dropdown.input && { input: dropdown.input }),
-    }),
-    range: Object.entries({
-      ...(dropdown.range.static && { range: dropdown.range.static }),
-    }),
-    radio: Object.entries({
-      ...(dropdown.range.radio && { radio: dropdown.range.radio }),
-    }),
-  } as const
-
-  const staticButtonFeature = features.staticButton.flatMap(([, feature]) => {
+  const staticButtonFeature = Object.entries({
+    ...(staticButton && { staticButton }),
+  }).flatMap(([, feature]) => {
     return Object.entries(feature)
   })
 
-  const dynamicButtonFeature = features.dynamicButton.flatMap(([, feature]) => {
+  const dynamicButtonFeature = Object.entries({
+    ...(dynamicButton && { dynamicButton }),
+  }).flatMap(([, feature]) => {
     return Object.entries(feature)
   })
 
-  const inputFeature = features.input.flatMap(([, feature]) => {
+  const inputFeature = Object.entries({
+    ...(dropdown.input && { input: dropdown.input }),
+  }).flatMap(([, feature]) => {
     return Object.entries(feature)
   })
 
-  const rangeFeature = features.range.flatMap(([, feature]) => {
+  const rangeFeature = Object.entries({
+    ...(dropdown.range.static && { range: dropdown.range.static }),
+  }).flatMap(([, feature]) => {
     return Object.entries(feature)
   })
 
-  const radioFeature = features.radio.flatMap(([, feature]) => {
+  const radioFeature = Object.entries({
+    ...(dropdown.range.radio && { radio: dropdown.range.radio }),
+  }).flatMap(([, feature]) => {
     return Object.entries(feature)
   })
 
