@@ -14,13 +14,16 @@ public class Main : BaseScript
       SendNuiMessage("{\"action\": \"showMenu\"}");
       SetNuiFocus(true, true);
     });
+    
     TriggerServerEvent("defineCommand", "sdk", ShowMenuEventName);
+
     RegisterNuiCallback("execute", new Action<IDictionary<string, object>, CallbackDelegate>((data, callback) =>
     {
       string rawCommand = data[NuiCallbacksParameter].ToString();
       ExecuteCommand(rawCommand);
       callback("ok");
     }));
+
     RegisterNuiCallback("hideMenu", new Action<IDictionary<string, object>, CallbackDelegate>((data, callback) =>
     {
       SetNuiFocus(false, false);

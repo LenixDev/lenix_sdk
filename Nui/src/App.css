@@ -4,7 +4,6 @@
 
 #root {
   @apply h-[100vh] flex;
-    background: #242424;
 }
 
 #Container {

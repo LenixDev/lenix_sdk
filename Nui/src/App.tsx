@@ -14,7 +14,7 @@ import DropdownRadios from './elements/dropdownRadio'
 
 const App = () => {
   const [search, setSearch] = useState<string | null>(null)
-  const [displayState, setDisplayState] = useState(true)
+  const [displayState, setDisplayState] = useState(false)
   const [buttonsStates, setButtonsStates] = useState<States>(null)
   const getMatcher = () => window.matchMedia('(prefers-color-scheme: dark)')
   const [isDarkMode, setIsDarkMode] = useState(getMatcher().matches)
