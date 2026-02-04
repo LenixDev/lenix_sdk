@@ -1,4 +1,4 @@
-import type { ButtonStates, Children, SetState } from ".."
+import type { States, Children, SetState } from ".."
 import { keepOthersExpandedOnSelect } from ".."
 import Button from "./button"
 
@@ -14,8 +14,8 @@ const Dropdown = ({
   label: string,
   id?: string,
   style?: string,
-  buttonsStates: ButtonStates,
-  setButtonsStates: SetState<ButtonStates>
+  buttonsStates: States,
+  setButtonsStates: SetState<States>
 }) =>
 <div className={style}>
   <Button

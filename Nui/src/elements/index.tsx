@@ -1,27 +1,7 @@
+import { triggerNuiCallback } from "@trippler/tr_lib/nui"
 import type { Dispatch, SetStateAction } from "react"
 
-export const keepOthersExpandedOnSelect = false
-
-export type Children = React.ReactNode
-
-export type States = Record<string, boolean> | null
-export type ButtonStates = States
-export type SetState<S> = Dispatch<SetStateAction<S>>
-export type ExecuteCallback<T> = (command: string, parameters?: string | string[]) => T
-export type InputArgs = Config["dropdown"]["input"][string]["args"]
-export type ButtonTypes = React.ButtonHTMLAttributes<HTMLButtonElement>['type']
-export type StaticRangeType = Config["dropdown"]["range"]["static"][string]["range"]
-export type RadiosType = Config["dropdown"]["range"]["radio"][number]["radios"]
-export type GeneratedButtons = Record<string, string>
-export type StaticButtonType = Config["staticButton"]
-export type DynamicButtonType = Config["dynamicButton"]
-export type InputDropdownType = Config["dropdown"]["input"]
-export type RangeDropdownType = Config["dropdown"]["range"]["static"]
-export type RadioDropdownType = Config["dropdown"]["range"]["radio"]
-export type RangeValuesType = Record<string, number>
-
-
-export type GetRef<T> = React.RefObject<T>
+const keepOthersExpandedOnSelect = false
 
 interface Range {
   min: number
@@ -29,7 +9,25 @@ interface Range {
   unlimitedPositive?: boolean
 }
 
-export interface Config {
+type Children = React.ReactNode
+
+type ExecuteCallback<T> = (command: string, parameters?: string | string[]) => T
+type States = Record<string, boolean> | null
+type SetState<S> = Dispatch<SetStateAction<S>>
+type RangeValues = Record<string, number>
+type ButtonTypes = React.ButtonHTMLAttributes<HTMLButtonElement>['type']
+type GeneratedButtons = Record<string, string>
+type GetRef<T> = React.RefObject<T>
+type Configs = {
+  InputArgs: Config["dropdown"]["input"][string]["args"]
+  StaticRangeType: Config["dropdown"]["range"]["static"][string]["range"]
+  RadiosType: Config["dropdown"]["range"]["radio"][number]["radios"]
+  InputDropdownType: Config["dropdown"]["input"]
+  RangeDropdownType: Config["dropdown"]["range"]["static"]
+  RadioDropdownType: Config["dropdown"]["range"]["radio"]
+}
+
+interface Config {
   staticButton: {
     [key: string]: string
   }
@@ -65,4 +63,26 @@ export interface Config {
       }>
     }
   }
+}
+
+const onClick: ExecuteCallback<unknown> = (command: string, parameters?: string | string[]) => {
+  const RawCommand = `${command} ${parameters ? (Array.isArray(parameters) ? parameters.join(' ') : parameters) : ''}`
+  triggerNuiCallback('execute', { RawCommand })
+}
+
+export {
+  onClick,
+  keepOthersExpandedOnSelect
+}
+
+export type {
+  Config,
+  Children,
+  Configs,
+  States,
+  SetState,
+  RangeValues,
+  ButtonTypes,
+  GeneratedButtons,
+  GetRef
 }

@@ -1,16 +1,9 @@
 import { useEffect, useState } from "react"
 import type {
-  ButtonStates,
   Config,
-  ExecuteCallback,
   States,
-  DynamicButtonType,
-  InputDropdownType,
-  RadioDropdownType,
-  RangeDropdownType,
-  StaticButtonType
+  Configs
 } from "."
-import { triggerNuiCallback } from "@trippler/tr_lib/nui"
 import {
   DynamicButton,
   InputDropdown,
@@ -18,11 +11,6 @@ import {
   RangeDropdown,
   StaticButton
 } from "./components/items"
-
-export const onClick: ExecuteCallback<unknown> = (command: string, parameters?: string | string[]) => {
-  const RawCommand = `${command} ${parameters ? (Array.isArray(parameters) ? parameters.join(' ') : parameters) : ''}`
-  triggerNuiCallback('execute', { RawCommand })
-}
 
 const getFilteredConfig = (search: string | null, CONFIG: Config) => {
   const searchLower = search ? search.toLowerCase() : ''
@@ -75,17 +63,17 @@ const Features = ({ search, CONFIG }: { search: string | null, CONFIG: Config })
   })
 
   const [states, setStates] = useState<States>(null)
-  const [buttonsStates, setButtonsStates] = useState<ButtonStates>(null)
-  const [isDarkMode, setIsDarkMode] = useState(false)
+  const [buttonsStates, setButtonsStates] = useState<States>(null)
+  const getMatcher = () => window.matchMedia('(prefers-color-scheme: dark)')
+  const [isDarkMode, setIsDarkMode] = useState(getMatcher().matches)
 
   useEffect(() => {
-    const matcher = window.matchMedia('(prefers-color-scheme: dark)')
-    setIsDarkMode(matcher.matches)
+    const matcher = getMatcher()
     const handler = ({ matches }: { matches: boolean }) => setIsDarkMode(matches)
     matcher.addEventListener('change', handler)
     return () => matcher.removeEventListener('change', handler)
   }, [])
-  
+
   const toggleBoolState = (command: string) => {
     setStates({ ...states, [command]: !states?.[command] })
     return !states?.[command]
@@ -94,19 +82,19 @@ const Features = ({ search, CONFIG }: { search: string | null, CONFIG: Config })
   return features().flatMap(([featureType, feature], i) => {
     switch (featureType) {
       case 'staticButton':
-      return <StaticButton key={i} {...{ feature: feature as StaticButtonType }} />
+      return <StaticButton key={i} {...{ feature: feature as Config["staticButton"] }} />
 
       case 'dynamicButton':
-      return <DynamicButton key={i} {...{ toggleBoolState, states, feature: feature as DynamicButtonType }} />
+      return <DynamicButton key={i} {...{ toggleBoolState, states, feature: feature as Config["dynamicButton"] }} />
 
       case 'input':
-      return <InputDropdown key={i} {...{ isDarkMode, buttonsStates, setButtonsStates, feature: feature as InputDropdownType }} />
+      return <InputDropdown key={i} {...{ isDarkMode, buttonsStates, setButtonsStates, feature: feature as Configs["InputDropdownType"] }} />
 
       case 'range':
-      return <RangeDropdown key={i} {...{ isDarkMode, buttonsStates, setButtonsStates, feature: feature as RangeDropdownType }} />
+      return <RangeDropdown key={i} {...{ isDarkMode, buttonsStates, setButtonsStates, feature: feature as Configs["RangeDropdownType"] }} />
 
       case 'radio':
-      return <RadioDropdown key={i} {...{ isDarkMode, buttonsStates, setButtonsStates, feature: feature as unknown as RadioDropdownType }} />
+      return <RadioDropdown key={i} {...{ isDarkMode, buttonsStates, setButtonsStates, feature: feature as unknown as Configs["RadioDropdownType"] }} />
     }
   })
 }

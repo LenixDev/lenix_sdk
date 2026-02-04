@@ -1,5 +1,10 @@
-import type { ButtonStates, DynamicButtonType, InputDropdownType, RadioDropdownType, RangeDropdownType, SetState, States, StaticButtonType } from ".."
-import { onClick } from "../features"
+import type {
+  Config,
+  Configs,
+  SetState,
+  States
+} from ".."
+import { onClick } from ".."
 import Button from "./button"
 import Dropdown from "./dropdown"
 import Inputs from "./inputs"
@@ -8,7 +13,7 @@ import Range from "./range"
 
 const StaticButton = ({
   feature
-}: { feature: StaticButtonType }) =>
+}: { feature: Config["staticButton"] }) =>
   Object.entries(feature).map(([command, key], i) =>
   <Button
     key={i}
@@ -21,7 +26,7 @@ const StaticButton = ({
 const DynamicButton = ({
   feature, toggleBoolState, states
 }: {
-  feature: DynamicButtonType
+  feature: Config["dynamicButton"]
   toggleBoolState: (command: string) => void
   states: States
 }) => Object.entries(feature).map(([command, key], i) => {
@@ -36,10 +41,10 @@ const DynamicButton = ({
 const InputDropdown = ({ 
   feature, isDarkMode, buttonsStates, setButtonsStates
 }: {
-  feature: InputDropdownType
+  feature: Configs["InputDropdownType"]
   isDarkMode: boolean
-  buttonsStates: ButtonStates
-  setButtonsStates: SetState<ButtonStates>
+  buttonsStates: States
+  setButtonsStates: SetState<States>
 }) => Object.entries(feature).map(([command, { label, args }], i) => (
   <Dropdown
     key={i}
@@ -53,10 +58,10 @@ const InputDropdown = ({
 const RangeDropdown = ({ 
   feature, isDarkMode, buttonsStates, setButtonsStates
 }: {
-  feature: RangeDropdownType
+  feature: Configs["RangeDropdownType"]
   isDarkMode: boolean
-  buttonsStates: ButtonStates
-  setButtonsStates: SetState<ButtonStates>
+  buttonsStates: States
+  setButtonsStates: SetState<States>
 }) => Object.entries(feature).map(([command, { label, range }], i) => (
   <Dropdown
     key={i}
@@ -70,10 +75,10 @@ const RangeDropdown = ({
 const RadioDropdown = ({ 
   feature, isDarkMode, buttonsStates, setButtonsStates
 }: {
-  feature: RadioDropdownType
+  feature: Configs["RadioDropdownType"]
   isDarkMode: boolean
-  buttonsStates: ButtonStates
-  setButtonsStates: SetState<ButtonStates>
+  buttonsStates: States
+  setButtonsStates: SetState<States>
 }) => Object.entries(feature).map(([, { label, range, radios }], i) => (
   <Dropdown 
     key={i}

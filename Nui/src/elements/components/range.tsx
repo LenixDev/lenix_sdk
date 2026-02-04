@@ -1,9 +1,9 @@
 import { useState, useRef, useEffect } from "react"
 import Button from "./button"
-import type { GetRef, RangeValuesType, StaticRangeType } from ".."
-import { onClick } from "../features"
+import type { Configs, GetRef, RangeValues } from ".."
+import { onClick } from ".."
 
-const getStorage = (command: string, min: number, max: number): RangeValuesType => {
+const getStorage = (command: string, min: number, max: number): RangeValues => {
   const storage = localStorage.getItem("rangeValue")
   if (storage) return JSON.parse(storage)
   else {
@@ -14,7 +14,7 @@ const getStorage = (command: string, min: number, max: number): RangeValuesType 
   }
 }
 
-const saveStorage = (rangeValues: RangeValuesType) => {
+const saveStorage = (rangeValues: RangeValues) => {
   localStorage.setItem("rangeValue", JSON.stringify(rangeValues))
 }
 
@@ -23,12 +23,12 @@ const Range = ({
     min, max, unlimitedPositive
   }, command
 }: {
-  range: StaticRangeType
+  range: Configs["StaticRangeType"]
   command: string
 }) => {
   const style = "px-2 bg-stone-600 rounded-md cursor-default"
   const defaultRanges = getStorage(command, min, max)
-  const [rangeValues, setRangeValues] = useState<RangeValuesType>(defaultRanges)
+  const [rangeValues, setRangeValues] = useState<RangeValues>(defaultRanges)
   const timerRef = useRef(0)
 
   useEffect(() => {

@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import type { GeneratedButtons, InputArgs } from '..'
-import { onClick } from '../features'
+import type { GeneratedButtons, Configs } from '..'
+import { onClick } from '..'
 import Button from './button'
 
 const getStoredButtons = (): GeneratedButtons => JSON.parse(localStorage.getItem('generatedButtons') || '{}')
@@ -17,7 +17,7 @@ const removeStorageButton = (command: string) => {
 const Inputs = ({
   args, command
 }: {
-  args: InputArgs
+  args: Configs["InputArgs"]
   command: string,
 }) => {
   const [, forceUpdate] = useState(0)
