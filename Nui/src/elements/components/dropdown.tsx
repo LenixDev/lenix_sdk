@@ -17,7 +17,7 @@ const Dropdown = ({
   buttonsStates: States,
   setButtonsStates: SetState<States>
 }) =>
-<div className={style}>
+<div className={`${style} flex flex-col`}>
   <Button
     id={id}
     label={buttonsStates?.[label] ? `⬇︎ ${label} ⬇︎` : `→ ${label} ←`}

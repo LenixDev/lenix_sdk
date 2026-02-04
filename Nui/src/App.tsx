@@ -1,15 +1,23 @@
 import { useEffect, useState } from 'react'
 import './App.css'
-import Buttons from './elements/features'
 import Container from './elements/components/container'
 import Header from './elements/components/header'
 import SearchBar from './elements/components/search'
 import ButtonGroup from './elements/components/group'
-import type { Config } from './elements'
+import type { Config, States } from './elements'
+import ResetButton from './elements/components/reset'
+import StaticButton from './elements/staticButton'
+import DynamicButton from './elements/dynamicButton'
+import InputDropdown from './elements/dropdownInputs'
+import RangeDropdown from './elements/dropdownRange'
+import RadioDropdown from './elements/dropdownRadio'
 
 const App = () => {
   const [search, setSearch] = useState<string | null>(null)
-  const [displayState, setDisplayState] = useState(false)
+  const [displayState, setDisplayState] = useState(true)
+  const [buttonsStates, setButtonsStates] = useState<States>(null)
+  const getMatcher = () => window.matchMedia('(prefers-color-scheme: dark)')
+  const [isDarkMode, setIsDarkMode] = useState(getMatcher().matches)
 
   const CONFIG: Config = {
     staticButton: {
@@ -81,6 +89,47 @@ const App = () => {
     }
   } as const
 
+  const getFilteredConfig = (search: string | null, CONFIG: Config) => {
+    const searchLower = search ? search.toLowerCase() : ''
+    return {
+      staticButton: Object.fromEntries(
+        Object.entries(CONFIG.staticButton).filter(([, val]) => 
+          !search || val.toLowerCase().includes(searchLower)
+        )
+      ),
+      dynamicButton: Object.fromEntries(
+        Object.entries(CONFIG.dynamicButton).filter(([, val]) => 
+          !search || val.toLowerCase().includes(searchLower)
+        )
+      ),
+      dropdown: {
+        input: Object.fromEntries(
+          Object.entries(CONFIG.dropdown.input).filter(([, data]) => 
+            !search || data.label.toLowerCase().includes(searchLower)
+          )
+        ),
+        range: {
+          static: Object.fromEntries(
+            Object.entries(CONFIG.dropdown.range.static).filter(([, data]) => 
+              !search || data.label.toLowerCase().includes(searchLower)
+            )
+          ),
+          radio: Object.fromEntries(
+            Object.entries(CONFIG.dropdown.range.radio).filter(([, data]) => 
+              !search || data.label.toLowerCase().includes(searchLower)
+            )
+          )
+        }
+      }
+    } as const
+  }
+
+  useEffect(() => {
+    const matcher = getMatcher()
+    const handler = ({ matches }: { matches: boolean }) => setIsDarkMode(matches)
+    matcher.addEventListener('change', handler)
+    return () => matcher.removeEventListener('change', handler)
+  }, [])
   window.addEventListener('message', ({ data: { action } }) => action === 'showMenu' && setDisplayState(true))
 
   useEffect(() => {
@@ -90,23 +139,76 @@ const App = () => {
         setDisplayState(false)
         document.removeEventListener('keydown', handler)
         fetch(`https://${GetParentResourceName()}/hideMenu`, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json; charset=UTF-8',
-            },
-            body: JSON.stringify({}),
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json; charset=UTF-8',
+          },
+          body: JSON.stringify({}),
         });
       }
     }
     document.addEventListener('keydown', handler)
   }, [displayState])
+  const {
+    staticButton, 
+    dynamicButton,
+    dropdown: {
+      input,
+      range: {
+        static: range,
+        radio,
+      },
+    }
+  } = getFilteredConfig(search, CONFIG)
+  const features = {
+    staticButton: Object.entries({
+      ...(staticButton && { staticButton }),
+    }),
+    dynamicButton: Object.entries({
+      ...(dynamicButton && { dynamicButton }),
+    }),
+    input: Object.entries({
+      ...(input && { input }),
+    }),
+    range: Object.entries({
+      ...(range && { range }),
+    }),
+    radio: Object.entries({
+      ...(radio && { radio }),
+    }),
+  }
+
+  const staticButtonFeature = features.staticButton.flatMap(([, feature]) => {
+    return Object.entries(feature)
+  })
+
+  const dynamicButtonFeature = features.dynamicButton.flatMap(([, feature]) => {
+    return Object.entries(feature)
+  })
+
+  const inputFeature = features.input.flatMap(([, feature]) => {
+    return Object.entries(feature)
+  })
+
+  const rangeFeature = features.range.flatMap(([, feature]) => {
+    return Object.entries(feature)
+  })
+
+  const radioFeature = features.radio.flatMap(([, feature]) => {
+    return Object.entries(feature)
+  })
 
   return (
     <Container {...{ displayState }}>
       <Header/>
+      <ResetButton/>
       <SearchBar {...{ setSearch }}/>
       <ButtonGroup>
-        <Buttons {...{ search, CONFIG }}/>
+        <StaticButton {...{ feature: staticButtonFeature }} />
+        <DynamicButton {...{ feature: dynamicButtonFeature }} />
+        <InputDropdown {...{ feature: inputFeature, isDarkMode, buttonsStates, setButtonsStates }} />
+        <RangeDropdown {...{ feature: rangeFeature, isDarkMode, buttonsStates, setButtonsStates }} />
+        <RadioDropdown {...{ feature: radioFeature, isDarkMode, buttonsStates, setButtonsStates }} />
       </ButtonGroup>
     </Container>
   )

@@ -2,6 +2,11 @@ import { triggerNuiCallback } from "@trippler/tr_lib/nui"
 import type { Dispatch, SetStateAction } from "react"
 
 const keepOthersExpandedOnSelect = false
+const storageAddresses = {
+  inputs: 'generatedButtons',
+  ranges: 'rangeValues',
+  dynamics: ''
+}
 
 interface Range {
   min: number
@@ -72,7 +77,8 @@ const onClick: ExecuteCallback<unknown> = (command: string, parameters?: string 
 
 export {
   onClick,
-  keepOthersExpandedOnSelect
+  keepOthersExpandedOnSelect,
+  storageAddresses
 }
 
 export type {

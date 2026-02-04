@@ -4,7 +4,7 @@ import type { Configs, GetRef, RangeValues } from ".."
 import { onClick } from ".."
 
 const getStorage = (command: string, min: number, max: number): RangeValues => {
-  const storage = localStorage.getItem("rangeValue")
+  const storage = localStorage.getItem("rangeValues")
   if (storage) return JSON.parse(storage)
   else {
     saveStorage({
@@ -15,7 +15,7 @@ const getStorage = (command: string, min: number, max: number): RangeValues => {
 }
 
 const saveStorage = (rangeValues: RangeValues) => {
-  localStorage.setItem("rangeValue", JSON.stringify(rangeValues))
+  localStorage.setItem("rangeValues", JSON.stringify(rangeValues))
 }
 
 const Range = ({

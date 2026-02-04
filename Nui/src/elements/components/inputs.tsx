@@ -1,9 +1,9 @@
 import { useState } from 'react'
 import type { GeneratedButtons, Configs } from '..'
-import { onClick } from '..'
+import { onClick, storageAddresses } from '..'
 import Button from './button'
 
-const getStoredButtons = (): GeneratedButtons => JSON.parse(localStorage.getItem('generatedButtons') || '{}')
+const getStoredButtons = (): GeneratedButtons => JSON.parse(localStorage.getItem(storageAddresses.inputs) || '{}')
 
 const getStoredButton = (command: string) => {
   const storage = getStoredButtons()
@@ -11,7 +11,7 @@ const getStoredButton = (command: string) => {
 }
 
 const removeStorageButton = (command: string) => {
-  localStorage.setItem('generatedButtons', JSON.stringify({ ...getStoredButtons(), [command]: undefined }))
+  localStorage.setItem(storageAddresses.inputs, JSON.stringify({ ...getStoredButtons(), [command]: undefined }))
 }
 
 const Inputs = ({
@@ -20,7 +20,7 @@ const Inputs = ({
   args: Configs["InputArgs"]
   command: string,
 }) => {
-  const [, forceUpdate] = useState(0)
+  const [, reRender] = useState(0)
   return (
     <form
       className={`flex flex-col`}
@@ -34,7 +34,7 @@ const Inputs = ({
           if (args[i].storageSave) {
             values.forEach((value, index) => {
               if (index === i) {
-                localStorage.setItem('generatedButtons', JSON.stringify({[args[i].storageSave as string]: value}))
+                localStorage.setItem(storageAddresses.inputs, JSON.stringify({[args[i].storageSave as string]: value}))
               }
             })
           }
@@ -48,6 +48,7 @@ const Inputs = ({
           type="text"
           placeholder={placeholder}
           required={required}
+          className='text-black'
         />
       )}
       {getStoredButton(command) && 
@@ -56,7 +57,7 @@ const Inputs = ({
           onMouseDown: () => {
             removeStorageButton(command)
             onClick(command, getStoredButton(command))
-            forceUpdate(n => n + 1)
+            reRender(_ => _ + 1)
           }
         }}/>
       }
