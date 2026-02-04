@@ -1,6 +1,6 @@
 import { useState } from "react"
 import type { States } from "../types"
-import Button from "./components/button"
+import Button from "../wrappers/button"
 import { onClick } from ".."
 
 const DynamicButtons = ({ feature }: {

@@ -1,5 +1,5 @@
 import { storageAddresses } from "../.."
-import Button from "./button"
+import Button from "../../wrappers/button"
 
 const ResetButton = () =>
 <div className="flex flex-col">

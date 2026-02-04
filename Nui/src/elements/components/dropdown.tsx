@@ -1,6 +1,6 @@
 import type { States, Children, SetState } from "../../types"
 import { keepOthersExpandedOnSelect } from "../.."
-import Button from "./button"
+import Button from "../../wrappers/button"
 
 const Dropdown = ({
   children,

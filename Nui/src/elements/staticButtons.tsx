@@ -1,5 +1,5 @@
 import { onClick } from ".."
-import Button from "./components/button"
+import Button from "../wrappers/button"
 
 const StaticButtons = ({ feature }: { feature: [string, string][] }) =>
 feature.map(([command, key], i) =>

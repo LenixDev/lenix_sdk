@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react"
-import Button from "./button"
+import Button from "../../wrappers/button"
 import type { Configs, GetRef, RangeValues } from "../../types"
 import { onClick } from "../.."
 
