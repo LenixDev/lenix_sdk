@@ -1,3 +1,7 @@
-export const Header = () => <h3 id="Header" className={`text-white bg-stone-600 text-center`}>SDK Tools</h3>
+export const Header = () =>
+<h3
+  id="Header"
+  className={`text-white bg-stone-600 text-center`}
+>SDK Tools</h3>
 
 export default Header

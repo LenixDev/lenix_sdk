@@ -14,15 +14,14 @@ export const Button = ({
   type?: ButtonTypes
   onMouseDown?: () => void
   stopHolding?: () => void
-}) => (
-  <button
-    type={type}
-    id={id}
-    className={style}
-    onMouseDown={onMouseDown}
-    onMouseLeave={stopHolding}
-    onMouseUp={stopHolding}
-  >{label}</button>
-)
+}) => 
+<button
+  type={type}
+  id={id}
+  className={style}
+  onMouseDown={onMouseDown}
+  onMouseLeave={stopHolding}
+  onMouseUp={stopHolding}
+>{label}</button>
 
 export default Button
