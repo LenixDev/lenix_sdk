@@ -3,7 +3,7 @@ import Dropdown from "./components/dropdown"
 import Range from "./components/range"
 
 const DropdownRanges = ({
-  feature, isDarkMode, buttonsStates, setButtonsStates
+  feature, buttonsStates, setButtonsStates
 }: {
   feature: [string, {
     label: string;
@@ -13,14 +13,13 @@ const DropdownRanges = ({
       unlimitedPositive?: boolean
     };
   }][]
-  isDarkMode: boolean
   buttonsStates: States
   setButtonsStates: SetState<States>
 }) => feature.map(([command, { label, range }], i) => (
   <Dropdown
     key={i}
     style="text-white"
-    {...{ label, isDarkMode, buttonsStates, setButtonsStates }}
+    {...{ label, buttonsStates, setButtonsStates }}
   >
     <Range {...{ range, command }} />
   </Dropdown>

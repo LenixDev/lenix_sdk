@@ -3,7 +3,7 @@ import Dropdown from "./components/dropdown"
 import Radio from "./components/radio"
 
 const DropdownRadios = ({
-  feature, isDarkMode, buttonsStates, setButtonsStates
+  feature, buttonsStates, setButtonsStates
 }: {
   feature: [string, {
     label: string;
@@ -18,14 +18,13 @@ const DropdownRadios = ({
       checked?: boolean;
     }>
   }][]
-  isDarkMode: boolean
   buttonsStates: States
   setButtonsStates: SetState<States>
 }) => feature.map(([, { label, range, radios }], i) => (
   <Dropdown 
     key={i}
     style="text-white"
-    {...{ label, isDarkMode, buttonsStates, setButtonsStates }}
+    {...{ label, buttonsStates, setButtonsStates }}
   >
     <Radio {...{ radios, range }} />
   </Dropdown>
