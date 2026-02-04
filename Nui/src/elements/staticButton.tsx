@@ -1,4 +1,4 @@
-import { onClick } from "."
+import { onClick } from ".."
 import Button from "./components/button"
 
 const StaticButtons = ({ feature }: { feature: [string, string][] }) =>

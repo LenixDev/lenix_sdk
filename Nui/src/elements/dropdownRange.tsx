@@ -1,4 +1,4 @@
-import { type SetState, type States } from "."
+import type { SetState, States } from "../types"
 import Dropdown from "./components/dropdown"
 import Range from "./components/range"
 

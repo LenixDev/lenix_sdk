@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import type { GeneratedButtons, Configs } from '..'
-import { onClick, storageAddresses } from '..'
+import type { GeneratedButtons, Configs } from '../../types'
+import { onClick, storageAddresses } from '../..'
 import Button from './button'
 
 const getStoredButtons = (): GeneratedButtons => JSON.parse(localStorage.getItem(storageAddresses.inputs) || '{}')
