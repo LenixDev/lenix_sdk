@@ -24,6 +24,40 @@ type Configs = {
   RadioDropdownType: Config["dropdown"]["range"]["radio"]
 }
 
+type StaticButtonFeature = [string, string][]
+type DynamicButtonFeature = [string, string][]
+type InputDropdownFeature = [string, {
+  label: string
+  args?: {
+    placeholder: string
+    required?: boolean
+    storageSave?: string
+  }[]
+}][]
+
+type RangeDropdownFeature = [string, {
+  label: string
+  range: {
+    min: number
+    max: number
+    unlimitedPositive?: boolean
+  }
+}][]
+
+type RadioDropdownFeature = [string, {
+  label: string;
+  range: {
+    min: number
+    max: number
+    unlimitedPositive?: boolean
+  };
+  radios: Array<{
+    command: string;
+    label: string;
+    checked?: boolean;
+  }>
+}][]
+
 interface Config {
   staticButton: {
     [key: string]: string
@@ -72,5 +106,10 @@ export type {
   ButtonTypes,
   GeneratedButtons,
   GetRef,
-  ExecuteCallback
+  ExecuteCallback,
+  DynamicButtonFeature,
+  StaticButtonFeature,
+  InputDropdownFeature,
+  RangeDropdownFeature,
+  RadioDropdownFeature
 }
