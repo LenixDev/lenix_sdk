@@ -6,7 +6,7 @@ import Inputs from "./inputs"
 import Radio from "./radio"
 import Range from "./range"
 
-export const StaticButton = ({
+const StaticButton = ({
   feature
 }: { feature: StaticButtonType }) =>
   Object.entries(feature).map(([command, key], i) =>
@@ -18,7 +18,7 @@ export const StaticButton = ({
     />
   )
 
-export const DynamicButton = ({
+const DynamicButton = ({
   feature, toggleBoolState, states
 }: {
   feature: DynamicButtonType
@@ -33,7 +33,7 @@ export const DynamicButton = ({
   />
 })
 
-export const InputDropdown = ({ 
+const InputDropdown = ({ 
   feature, isDarkMode, buttonsStates, setButtonsStates
 }: {
   feature: InputDropdownType
@@ -50,7 +50,7 @@ export const InputDropdown = ({
   </Dropdown>
 ))
 
-export const RangeDropdown = ({ 
+const RangeDropdown = ({ 
   feature, isDarkMode, buttonsStates, setButtonsStates
 }: {
   feature: RangeDropdownType
@@ -67,7 +67,7 @@ export const RangeDropdown = ({
   </Dropdown>
 ))
 
-export const RadioDropdown = ({ 
+const RadioDropdown = ({ 
   feature, isDarkMode, buttonsStates, setButtonsStates
 }: {
   feature: RadioDropdownType
@@ -83,3 +83,5 @@ export const RadioDropdown = ({
     <Radio {...{ radios, range }} />
   </Dropdown>
 ))
+
+export { StaticButton, DynamicButton, InputDropdown, RangeDropdown, RadioDropdown }

@@ -2,7 +2,7 @@ import type { ButtonStates, Children, SetState } from ".."
 import { keepOthersExpandedOnSelect } from ".."
 import Button from "./button"
 
-export const Dropdown = ({
+const Dropdown = ({
   children,
   label,
   id,

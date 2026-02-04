@@ -1,4 +1,4 @@
-export const Search = ({ setSearch }: { setSearch: (state: string) => void }) =>
+const Search = ({ setSearch }: { setSearch: (state: string) => void }) =>
 <input
   type="text"
   placeholder='Search for a feature'

@@ -1,4 +1,4 @@
-export const Header = () =>
+const Header = () =>
 <h3
   id="Header"
   className={`text-white bg-stone-600 text-center`}

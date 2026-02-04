@@ -18,7 +18,7 @@ const saveStorage = (rangeValues: RangeValuesType) => {
   localStorage.setItem("rangeValue", JSON.stringify(rangeValues))
 }
 
-export const Range = ({
+const Range = ({
   range: {
     min, max, unlimitedPositive
   }, command

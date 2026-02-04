@@ -1,6 +1,6 @@
 import type { ButtonTypes } from ".."
 
-export const Button = ({
+const Button = ({
   label,
   style,
   id,

@@ -59,7 +59,7 @@ const getFilteredConfig = (search: string | null, CONFIG: Config) => {
   } as const
 }
 
-export const Features = ({ search, CONFIG }: { search: string | null, CONFIG: Config }) => {
+const Features = ({ search, CONFIG }: { search: string | null, CONFIG: Config }) => {
   const { staticButton, dynamicButton, dropdown: {
     input, range: {
       static: range,
