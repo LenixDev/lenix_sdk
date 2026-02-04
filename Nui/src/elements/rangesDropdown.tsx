@@ -1,18 +1,11 @@
-import type { SetState, States } from "../types"
+import type { RangeDropdownFeature, SetState, States } from "../types"
 import Dropdown from "./components/dropdown"
 import Range from "./components/range"
 
 const DropdownRanges = ({
   feature, buttonsStates, setButtonsStates
 }: {
-  feature: [string, {
-    label: string;
-    range: {
-      min: number
-      max: number
-      unlimitedPositive?: boolean
-    };
-  }][]
+  feature: RangeDropdownFeature
   buttonsStates: States
   setButtonsStates: SetState<States>
 }) => feature.map(([command, { label, range }], i) => (

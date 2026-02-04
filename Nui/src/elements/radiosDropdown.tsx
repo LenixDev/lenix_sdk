@@ -1,23 +1,11 @@
-import type { SetState, States } from "../types"
+import type { RadioDropdownFeature, SetState, States } from "../types"
 import Dropdown from "./components/dropdown"
 import Radio from "./components/radio"
 
 const DropdownRadios = ({
   feature, buttonsStates, setButtonsStates
 }: {
-  feature: [string, {
-    label: string;
-    range: {
-      min: number
-      max: number
-      unlimitedPositive?: boolean
-    };
-    radios: Array<{
-      command: string;
-      label: string;
-      checked?: boolean;
-    }>
-  }][]
+  feature: RadioDropdownFeature
   buttonsStates: States
   setButtonsStates: SetState<States>
 }) => feature.map(([, { label, range, radios }], i) => (

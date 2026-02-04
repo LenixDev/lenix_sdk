@@ -1,7 +1,8 @@
 import { onClick } from ".."
+import type { StaticButtonFeature } from "../types"
 import Button from "../wrappers/button"
 
-const StaticButtons = ({ feature }: { feature: [string, string][] }) =>
+const StaticButtons = ({ feature }: { feature: StaticButtonFeature }) =>
 feature.map(([command, key], i) =>
   <Button
     key={i}
