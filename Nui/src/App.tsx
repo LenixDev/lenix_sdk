@@ -6,11 +6,11 @@ import SearchBar from './elements/components/search'
 import ButtonGroup from './elements/components/group'
 import type { Config, States } from './elements'
 import ResetButton from './elements/components/reset'
-import StaticButton from './elements/staticButton'
-import DynamicButton from './elements/dynamicButton'
-import InputDropdown from './elements/dropdownInputs'
-import RangeDropdown from './elements/dropdownRange'
-import RadioDropdown from './elements/dropdownRadio'
+import StaticButtons from './elements/staticButton'
+import DynamicButtons from './elements/dynamicButton'
+import DropdownInputs from './elements/dropdownInputs'
+import DropdownRanges from './elements/dropdownRange'
+import DropdownRadios from './elements/dropdownRadio'
 
 const App = () => {
   const [search, setSearch] = useState<string | null>(null)
@@ -204,11 +204,11 @@ const App = () => {
       <ResetButton/>
       <SearchBar {...{ setSearch }}/>
       <ButtonGroup>
-        <StaticButton {...{ feature: staticButtonFeature }} />
-        <DynamicButton {...{ feature: dynamicButtonFeature }} />
-        <InputDropdown {...{ feature: inputFeature, isDarkMode, buttonsStates, setButtonsStates }} />
-        <RangeDropdown {...{ feature: rangeFeature, isDarkMode, buttonsStates, setButtonsStates }} />
-        <RadioDropdown {...{ feature: radioFeature, isDarkMode, buttonsStates, setButtonsStates }} />
+        <StaticButtons {...{ feature: staticButtonFeature }} />
+        <DynamicButtons {...{ feature: dynamicButtonFeature }} />
+        <DropdownInputs {...{ feature: inputFeature, isDarkMode, buttonsStates, setButtonsStates }} />
+        <DropdownRanges {...{ feature: rangeFeature, isDarkMode, buttonsStates, setButtonsStates }} />
+        <DropdownRadios {...{ feature: radioFeature, isDarkMode, buttonsStates, setButtonsStates }} />
       </ButtonGroup>
     </Container>
   )

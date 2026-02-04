@@ -2,7 +2,7 @@ import { type SetState, type States } from "."
 import Dropdown from "./components/dropdown"
 import Range from "./components/range"
 
-const RangeDropdown = ({
+const DropdownRanges = ({
   feature, isDarkMode, buttonsStates, setButtonsStates
 }: {
   feature: [string, {
@@ -26,4 +26,4 @@ const RangeDropdown = ({
   </Dropdown>
 ))
 
-export default RangeDropdown
+export default DropdownRanges

@@ -2,7 +2,7 @@ import { type SetState, type States } from "."
 import Dropdown from "./components/dropdown"
 import Inputs from "./components/inputs"
 
-const InputDropdown = ({
+const DropdownInputs = ({
   feature, isDarkMode, buttonsStates, setButtonsStates
 }: {
   feature: [string, {
@@ -26,4 +26,4 @@ const InputDropdown = ({
   </Dropdown>
 ))
 
-export default InputDropdown
+export default DropdownInputs

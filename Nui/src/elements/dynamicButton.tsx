@@ -2,7 +2,7 @@ import { useState } from "react"
 import { onClick, type States } from "."
 import Button from "./components/button"
 
-const DynamicButton = ({ feature }: {
+const DynamicButtons = ({ feature }: {
   feature: [string, string][]
 }) => {
   const [states, setStates] = useState<States>(null)
@@ -22,4 +22,4 @@ const DynamicButton = ({ feature }: {
   })
 }
 
-export default DynamicButton
+export default DynamicButtons

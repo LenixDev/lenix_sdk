@@ -1,7 +1,7 @@
 import { onClick } from "."
 import Button from "./components/button"
 
-const StaticButton = ({ feature }: { feature: [string, string][] }) =>
+const StaticButtons = ({ feature }: { feature: [string, string][] }) =>
 feature.map(([command, key], i) =>
   <Button
     key={i}
@@ -11,4 +11,4 @@ feature.map(([command, key], i) =>
   />
 )
 
-export default StaticButton
+export default StaticButtons

@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react"
 import Button from "./button"
-import type { Configs, GetRef, RangeValues } from ".."
-import { onClick } from ".."
+import type { Configs, GetRef, RangeValues } from "../../types"
+import { onClick } from "../.."
 
 const getStorage = (command: string, min: number, max: number): RangeValues => {
   const storage = localStorage.getItem("rangeValues")

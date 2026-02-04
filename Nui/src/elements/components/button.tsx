@@ -1,4 +1,4 @@
-import type { ButtonTypes } from ".."
+import type { ButtonTypes } from "../../types"
 
 const Button = ({
   label,

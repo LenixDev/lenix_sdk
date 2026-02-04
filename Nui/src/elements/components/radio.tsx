@@ -1,5 +1,5 @@
 import { useState } from "react"
-import type { Configs } from ".."
+import type { Configs } from "../../types"
 import Range from "./range"
 
 const Radio = ({

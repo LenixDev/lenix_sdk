@@ -1,4 +1,4 @@
-import type { Children } from ".."
+import type { Children } from "../../types"
 
 const Group = ({ children }: { children: Children }) =>
 <div className={`flex flex-col items-center gap-.2em`}>

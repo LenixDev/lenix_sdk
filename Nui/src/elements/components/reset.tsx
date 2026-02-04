@@ -1,4 +1,4 @@
-import { storageAddresses } from ".."
+import { storageAddresses } from "../.."
 import Button from "./button"
 
 const ResetButton = () =>

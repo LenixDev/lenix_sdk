@@ -1,8 +1,8 @@
-import { type Config, type SetState, type States } from "."
+import { type SetState, type States } from "."
 import Dropdown from "./components/dropdown"
 import Radio from "./components/radio"
 
-const RadioDropdown = ({
+const DropdownRadios = ({
   feature, isDarkMode, buttonsStates, setButtonsStates
 }: {
   feature: [string, {
@@ -31,4 +31,4 @@ const RadioDropdown = ({
   </Dropdown>
 ))
 
-export default RadioDropdown
+export default DropdownRadios

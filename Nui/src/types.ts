@@ -1,12 +1,4 @@
-import { triggerNuiCallback } from "@trippler/tr_lib/nui"
 import type { Dispatch, SetStateAction } from "react"
-
-const keepOthersExpandedOnSelect = false
-const storageAddresses = {
-  inputs: 'generatedButtons',
-  ranges: 'rangeValues',
-  dynamics: ''
-}
 
 interface Range {
   min: number
@@ -70,17 +62,6 @@ interface Config {
   }
 }
 
-const onClick: ExecuteCallback<unknown> = (command: string, parameters?: string | string[]) => {
-  const RawCommand = `${command} ${parameters ? (Array.isArray(parameters) ? parameters.join(' ') : parameters) : ''}`
-  triggerNuiCallback('execute', { RawCommand })
-}
-
-export {
-  onClick,
-  keepOthersExpandedOnSelect,
-  storageAddresses
-}
-
 export type {
   Config,
   Children,
@@ -90,5 +71,6 @@ export type {
   RangeValues,
   ButtonTypes,
   GeneratedButtons,
-  GetRef
+  GetRef,
+  ExecuteCallback
 }
