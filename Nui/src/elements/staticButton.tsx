@@ -5,8 +5,7 @@ const StaticButtons = ({ feature }: { feature: [string, string][] }) =>
 feature.map(([command, key], i) =>
   <Button
     key={i}
-    id={"StaticButton"}
-    style="text-white"
+    style="StaticButton"
     {...{ label: key, onMouseDown: () => onClick(command) }}
   />
 )

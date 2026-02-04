@@ -11,9 +11,20 @@
   background-color: #ffffff;
 }
 
+.StaticButton {
+  @apply text-black
+}
+
 @media (prefers-color-scheme: dark) {
   #Container {
     background: #242424;
     color: rgba(255, 255, 255, 0.87);
   }
+  .StaticButton {
+    @apply text-white
+  }
+}
+
+.Header {
+  @apply text-white bg-stone-600 text-center font-bold cursor-default
 }

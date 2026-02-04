@@ -3,7 +3,7 @@ import './App.css'
 import Container from './elements/components/container'
 import Header from './elements/components/header'
 import SearchBar from './elements/components/search'
-import ButtonGroup from './elements/components/group'
+import Groups from './elements/components/group'
 import type { Config, States } from './types'
 import ResetButton from './elements/components/reset'
 import StaticButtons from './elements/staticButton'
@@ -181,13 +181,18 @@ const App = () => {
       <Header/>
       <ResetButton/>
       <SearchBar {...{ setSearch }}/>
-      <ButtonGroup>
+      <Groups>
+        <h3 className='Header' >Statics</h3>
         <StaticButtons {...{ feature: staticButtonFeatures }} />
+        <h3 className='Header' >Dynamics</h3>
         <DynamicButtons {...{ feature: dynamicButtonFeatures }} />
+        <h3 className='Header' >Inputs</h3>
         <DropdownInputs {...{ feature: inputFeatures, isDarkMode, buttonsStates, setButtonsStates }} />
+        <h3 className='Header' >Ranges</h3>
         <DropdownRanges {...{ feature: rangeFeatures, isDarkMode, buttonsStates, setButtonsStates }} />
+        <h3 className='Header' >Range Radios</h3>
         <DropdownRadios {...{ feature: radioFeatures, isDarkMode, buttonsStates, setButtonsStates }} />
-      </ButtonGroup>
+      </Groups>
     </Container>
   )
 }

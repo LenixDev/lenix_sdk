@@ -1,8 +1,8 @@
 import type { Children } from "../../types"
 
-const Group = ({ children }: { children: Children }) =>
-<div className={`flex flex-col items-center gap-.2em`}>
+const Groups = ({ children }: { children: Children }) =>
+<div className={`flex flex-col gap-.2em`}>
   {children}
 </div>
 
-export default Group
+export default Groups

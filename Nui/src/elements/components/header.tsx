@@ -1,7 +1,6 @@
 const Header = () =>
 <h3
-  id="Header"
-  className={`text-white bg-stone-600 text-center`}
+  className="Header"
 >SDK Tools</h3>
 
 export default Header
