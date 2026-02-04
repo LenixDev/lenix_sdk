@@ -14,12 +14,13 @@ public class Main : BaseScript
       SendNuiMessage("{\"action\": \"showMenu\"}");
       SetNuiFocus(true, true);
     });
-    
+
     TriggerServerEvent("defineCommand", "sdk", ShowMenuEventName);
 
     RegisterNuiCallback("execute", new Action<IDictionary<string, object>, CallbackDelegate>((data, callback) =>
     {
       string rawCommand = data[NuiCallbacksParameter].ToString();
+      // TODO: figure a solution for the "Access denied for command ${this.rawCommand}"
       ExecuteCommand(rawCommand);
       callback("ok");
     }));
