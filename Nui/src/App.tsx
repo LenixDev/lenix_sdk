@@ -14,11 +14,15 @@ import DropdownRadios from './elements/radiosDropdown'
 
 const App = () => {
   const [search, setSearch] = useState<string | null>(null)
-  const [displayState, setDisplayState] = useState(false)
+  const [displayState, setDisplayState] = useState(true)
   const [buttonsStates, setButtonsStates] = useState<States>(null)
   const getMatcher = () => window.matchMedia('(prefers-color-scheme: dark)')
   const [isDarkMode, setIsDarkMode] = useState(getMatcher().matches)
 
+  /* 
+    https://docs.fivem.net/docs/client-manual/console-commands/#devgui_cmd-path-command
+    https://docs.fivem.net/docs/client-manual/console-commands/#devgui_cmd-path-command
+  */
   const CONFIG: Config = {
     staticButton: {
       disconnect: 'Disconnect',
@@ -26,11 +30,30 @@ const App = () => {
       cmdlist: 'cmdlist',
       list_aces: 'Show ACEs',
       list_principals: 'Show Principals',
+      net_showCommands: 'Show Commands',
+      net_showDrilldown: 'Show Drilldown',
+      net_showTime: 'Show Time',
+      netobjviewer_syncLog: 'Objects Viewer Sync Log',
+      nui_devtools: 'NUI Devtools',
+      r_disableRendering: 'Disable Rendering',
     },
     dynamicButton: {
-      cl_drawfps: 'Toggle Fps',
-      cl_drawperf: 'Toggle Performance',
+      cl_drawfps: 'Fps',
+      cl_drawperf: 'Performance',
       developer: 'Developer Logging',
+      modelviewer: 'Model Viewer',
+      netEventLog: 'Event Log',
+      netgraph: 'Netgraph',
+      netobjviewer: 'Net Object Viewer',
+      resmon: 'Resource Monitor',
+      se_debug: 'Debug',
+      strdbg: 'Stream Debug',
+      strlist: 'Stream List',
+      strmem: 'Stream Memory',
+      game_enableScaleformDebugLog: 'Enable Scaleform Debug Log',
+      game_enableFlyThroughWindscreen: 'Enable Fly Through Windscreen',
+      game_enablePlayerRagdollOnCollision: 'Enable Player Ragdoll On Collision',
+      test_ace: 'Test ACE',
     },
     dropdown: {
       input: {
@@ -44,20 +67,38 @@ const App = () => {
         },
         unbind: {
           label: 'Unbind',
-          args: [
-            { placeholder: 'The keyboard bind to unbind', required: true }
-          ],
+          args: [ { placeholder: 'The keyboard bind to unbind', required: true } ],
         },
         quit: {
           label: 'Quit',
-          args: [
-            { placeholder: 'The reason for quitting', required: false }
-          ],
+          args: [ { placeholder: 'The reason for quitting', required: false } ],
         },
         con_miniconChannels: {
           label: 'Mini Console',
+          args: [ { placeholder: '* = all messages | script:* = all messages from all scripts', required: true } ],
+        },
+        net_printOwner: {
+          label: 'Print Owner Of Object ID',
+          args: [ { placeholder: 'Object ID', required: true } ],
+        },
+        net_statsFile: {
+          label: 'Stats File',
+          args: [ { placeholder: 'Give a name to the stats file', required: true } ],
+        },
+        save_gta_cache: {
+          label: 'Save GTA Cache',
+          args: [ { placeholder: 'The name of the resource to save the cache from', required: true } ],
+        },
+        set: {
+          label: 'Set a client var',
           args: [
-            { placeholder: '* = all messages | script:* = all messages from all scripts', required: true }
+            { placeholder: 'key', required: true }, { placeholder: 'value', required: true }
+          ],
+        },
+        seta: {
+          label: 'Set a client archived var',
+          args: [
+            { placeholder: 'key', required: true }, { placeholder: 'value', required: true }
           ],
         },
       },
@@ -187,11 +228,11 @@ const App = () => {
         <h3 className='Header' >Dynamics</h3>
         <DynamicButtons {...{ feature: dynamicButtonFeatures }} />
         <h3 className='Header' >Inputs</h3>
-        <DropdownInputs {...{ feature: inputFeatures, isDarkMode, buttonsStates, setButtonsStates }} />
+        <DropdownInputs {...{ feature: inputFeatures, buttonsStates, setButtonsStates }} />
         <h3 className='Header' >Ranges</h3>
-        <DropdownRanges {...{ feature: rangeFeatures, isDarkMode, buttonsStates, setButtonsStates }} />
+        <DropdownRanges {...{ feature: rangeFeatures, buttonsStates, setButtonsStates }} />
         <h3 className='Header' >Range Radios</h3>
-        <DropdownRadios {...{ feature: radioFeatures, isDarkMode, buttonsStates, setButtonsStates }} />
+        <DropdownRadios {...{ feature: radioFeatures, buttonsStates, setButtonsStates }} />
       </Groups>
     </Container>
   )
